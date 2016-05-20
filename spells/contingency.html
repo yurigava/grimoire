@@ -13,6 +13,7 @@
     <link rel="canonical" href="http://ephe.github.io/grimoire/spells/contingency">
     <script src="http://use.typekit.net/nra6zxt.js"></script>
     <script src="/grimoire/js/jets.min.js"></script>
+	<link media="all" href="https://use.typekit.net/c/655870/1w;calluna,2,b4p:P:i4,b4t:P:i7,b4m:P:n3,b4n:P:n4,b4s:P:n7/l" rel="stylesheet">
     <script>try{Typekit.load();}catch(e){}</script>
     <script type="text/javascript">
     	function menuClick() {
@@ -24,8 +25,54 @@
     		}
   		}
 
+        function schoolClick(e) {
+            var schools = Array.prototype.slice.call(document.querySelectorAll('.spell-school:not([name="all"])')),
+                selected = e.target,
+                tags = [];
+
+            if (selected.nodeName !== 'A') return;
+            if (selected.name == 'all') {
+                selected.classList.add('selected');
+                schools.forEach(function(school) {
+                    school.classList.remove('selected');
+                });
+            }
+            else {
+                document.querySelector('.spell-school[name="all"]').classList.remove('selected');
+                selected.classList.toggle('selected');
+                tags = Array.prototype.slice.call(document.querySelectorAll('.spell-school.selected')).map(function(el) { return el.name; });
+            }
+
+            filterSpells(tags);
+        }
+
+        /**
+         * Hide/show spells based on presence of at least one of the given tags.
+         */
+        function filterSpells(tags) {
+            var spells = document.querySelectorAll('.post-list li'),
+                selector,
+                unselected
+
+            // Start by making previously hidden spells visible again
+            // (this does not conflict with jets search filtering)
+            Array.prototype.slice.call(spells).forEach(function(spell) {
+                spell.style.display = '';
+            });
+
+            if (tags.length == 0) return;
+
+            // Hide all spells where all of the given tags are not present
+            selector = tags.map(function(tag) { return ':not([tags~="' + tag + '"])'; });
+            unselected = document.querySelectorAll('.post-list .post-link' + selector.join(''));
+            Array.prototype.slice.call(unselected).forEach(function(spell) {
+                spell.parentNode.style.display = 'none';
+            });
+        }
+
   		window.onload = function(){
         document.getElementById("menuIcon").addEventListener( 'click' , menuClick );
+        document.querySelector(".schools-list").addEventListener( 'click', schoolClick );
 	    }
     </script>
 </head>
@@ -93,6 +140,12 @@
         
     </dd>
     
+    <dd>
+        
+          <a href="/grimoire/tags/evocation.html">evocation</a>
+        
+    </dd>
+    
   </header>
 
   <article class="post-content">
@@ -106,7 +159,7 @@
 
 <p><strong>Duration</strong>: 10 days</p>
 
-<p>Choose a spell of 5th level or lower that you can cast, that has a casting time of 1 action, and that can target you. You cast that spell–called the contingent spell–as part of casting <em>contingency</em>, expending spell slots for both, but the contingent spell doesn’t come into effect. Instead, it takes effect when a certain circumstance occurs. You describe that circumstance when you cast the two spells. For example, a <em>contingency</em> cast with <em><a href="../water-breathing/" title="water breathing (lvl 3)">water breathing</a></em> might stipulate that <em>water breathing</em> comes into effect when you are engulfed in water or a similar liquid.</p>
+<p>Choose a spell of 5th level or lower that you can cast, that has a casting time of 1 action, and that can target you. You cast that spell–called the contingent spell–as part of casting <em>contingency</em>, expending spell slots for both, but the contingent spell doesn’t come into effect. Instead, it takes effect when a certain circumstance occurs. You describe that circumstance when you cast the two spells. For example, a <em>contingency</em> cast with <em><a href="water-breathing" title="water breathing (lvl 3)">water breathing</a></em> might stipulate that <em>water breathing</em> comes into effect when you are engulfed in water or a similar liquid.</p>
 
 <p>The contingent spell takes effect immediately after the circumstance is met for the first time, whether or not you want it to. and then contingency ends.</p>
 

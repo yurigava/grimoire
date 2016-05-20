@@ -13,6 +13,7 @@
     <link rel="canonical" href="http://ephe.github.io/grimoire/tags/cantrip">
     <script src="http://use.typekit.net/nra6zxt.js"></script>
     <script src="/grimoire/js/jets.min.js"></script>
+	<link media="all" href="https://use.typekit.net/c/655870/1w;calluna,2,b4p:P:i4,b4t:P:i7,b4m:P:n3,b4n:P:n4,b4s:P:n7/l" rel="stylesheet">
     <script>try{Typekit.load();}catch(e){}</script>
     <script type="text/javascript">
     	function menuClick() {
@@ -24,8 +25,54 @@
     		}
   		}
 
+        function schoolClick(e) {
+            var schools = Array.prototype.slice.call(document.querySelectorAll('.spell-school:not([name="all"])')),
+                selected = e.target,
+                tags = [];
+
+            if (selected.nodeName !== 'A') return;
+            if (selected.name == 'all') {
+                selected.classList.add('selected');
+                schools.forEach(function(school) {
+                    school.classList.remove('selected');
+                });
+            }
+            else {
+                document.querySelector('.spell-school[name="all"]').classList.remove('selected');
+                selected.classList.toggle('selected');
+                tags = Array.prototype.slice.call(document.querySelectorAll('.spell-school.selected')).map(function(el) { return el.name; });
+            }
+
+            filterSpells(tags);
+        }
+
+        /**
+         * Hide/show spells based on presence of at least one of the given tags.
+         */
+        function filterSpells(tags) {
+            var spells = document.querySelectorAll('.post-list li'),
+                selector,
+                unselected
+
+            // Start by making previously hidden spells visible again
+            // (this does not conflict with jets search filtering)
+            Array.prototype.slice.call(spells).forEach(function(spell) {
+                spell.style.display = '';
+            });
+
+            if (tags.length == 0) return;
+
+            // Hide all spells where all of the given tags are not present
+            selector = tags.map(function(tag) { return ':not([tags~="' + tag + '"])'; });
+            unselected = document.querySelectorAll('.post-list .post-link' + selector.join(''));
+            Array.prototype.slice.call(unselected).forEach(function(spell) {
+                spell.parentNode.style.display = 'none';
+            });
+        }
+
   		window.onload = function(){
         document.getElementById("menuIcon").addEventListener( 'click' , menuClick );
+        document.querySelector(".schools-list").addEventListener( 'click', schoolClick );
 	    }
     </script>
 </head>
@@ -119,6 +166,45 @@
 				</dd>
 				
 			</dl>
+			<dl class="schools-list">
+				<dt>Spell schools:</dt>
+					<dd>
+						<a class="spell-school selected" name="all">All</a>
+					</dd> |
+					
+					<dd>
+						<a class="spell-school" name="abjuration">Abjuration</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="conjuration">Conjuration</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="divination">Divination</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="enchantment">Enchantment</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="evocation">Evocation</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="illusion">Illusion</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="necromancy">Necromancy</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="transmutaion">Transmutation</a>
+					</dd>
+					
+			</dl>
 
 			
 			<a id="cantrip"></a>
@@ -133,293 +219,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/acid-splash">Acid Splash</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/blade-ward">Blade Ward</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/booming-blade">Booming Blade</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/chill-touch">Chill Touch</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/control-flames">Control Flames</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/create-bonfire">Create Bonfire</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/dancing-lights">Dancing Lights</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/druidcraft">Druidcraft</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/eldritch-blast">Eldritch Blast</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/fire-bolt">Fire Bolt</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/friends">Friends</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/frostbite">Frostbite</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/green-flame-blade">Green-Flame Blade</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/guidance">Guidance</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/gust">Gust</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/light">Light</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/lightning-lure">Lightning Lure</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/mage-hand">Mage Hand</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/magic-stone">Magic Stone</a>
+					<a class="post-link" tags="sorcerer wizard cantrip conjuration" href="/grimoire/spells/acid-splash">Acid Splash</a>
 				</li>
 			</ul>
 			
@@ -439,23 +239,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/mending">Mending</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/message">Message</a>
+					<a class="post-link" tags="bard sorcerer warlock wizard cantrip abjuration" href="/grimoire/spells/blade-ward">Blade Ward</a>
 				</li>
 			</ul>
 			
@@ -473,23 +257,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/minor-illusion">Minor Illusion</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/mold-earth">Mold Earth</a>
+					<a class="post-link" tags="sorcerer warlock wizard cantrip evocation" href="/grimoire/spells/booming-blade">Booming Blade</a>
 				</li>
 			</ul>
 			
@@ -507,7 +275,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/poison-spray">Poison Spray</a>
+					<a class="post-link" tags="sorcerer warlock wizard cantrip necromancy" href="/grimoire/spells/chill-touch">Chill Touch</a>
 				</li>
 			</ul>
 			
@@ -525,153 +293,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/prestidigitation">Prestidigitation</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/produce-flame">Produce Flame</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/ray-of-frost">Ray of Frost</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/resistance">Resistance</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/sacred-flame">Sacred Flame</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/shape-water">Shape Water</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/shillelagh">Shillelagh</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/shocking-grasp">Shocking Grasp</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/spare-the-dying">Spare the Dying</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/sword-burst">Sword Burst</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/thaumaturgy">Thaumaturgy</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/thorn-whip">Thorn Whip</a>
+					<a class="post-link" tags="druid sorcerer wizard cantrip transmutation" href="/grimoire/spells/control-flames">Control Flames</a>
 				</li>
 			</ul>
 			
@@ -691,7 +313,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/thunderclap">Thunderclap</a>
+					<a class="post-link" tags="druid sorcerer warlock wizard cantrip conjuration" href="/grimoire/spells/create-bonfire">Create Bonfire</a>
 				</li>
 			</ul>
 			
@@ -709,9 +331,11 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/true-strike">True Strike</a>
+					<a class="post-link" tags="bard sorcerer wizard cantrip evocation" href="/grimoire/spells/dancing-lights">Dancing Lights</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
@@ -721,9 +345,549 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/vicious-mockery">Vicious Mockery</a>
+					<a class="post-link" tags="druid cantrip transmutation" href="/grimoire/spells/druidcraft">Druidcraft</a>
 				</li>
 			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="warlock cantrip evocation" href="/grimoire/spells/eldritch-blast">Eldritch Blast</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="sorcerer wizard cantrip evocation" href="/grimoire/spells/fire-bolt">Fire Bolt</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard sorcerer warlock wizard cantrip enchantment" href="/grimoire/spells/friends">Friends</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid sorcerer warlock wizard cantrip evocation" href="/grimoire/spells/frostbite">Frostbite</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="sorcerer warlock wizard cantrip evocation" href="/grimoire/spells/green-flame-blade">Green-Flame Blade</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="cleric druid cantrip divination" href="/grimoire/spells/guidance">Guidance</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid sorcerer wizard cantrip transmutation" href="/grimoire/spells/gust">Gust</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard cleric sorcerer wizard cantrip evocation" href="/grimoire/spells/light">Light</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="sorcerer warlock wizard cantrip evocation" href="/grimoire/spells/lightning-lure">Lightning Lure</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard sorcerer warlock wizard cantrip conjuration" href="/grimoire/spells/mage-hand">Mage Hand</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid warlock cantrip transmutation" href="/grimoire/spells/magic-stone">Magic Stone</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard cleric druid sorcerer wizard cantrip transmutation" href="/grimoire/spells/mending">Mending</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard sorcerer wizard cantrip transmutation" href="/grimoire/spells/message">Message</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard sorcerer warlock wizard cantrip illusion" href="/grimoire/spells/minor-illusion">Minor Illusion</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid sorcerer wizard cantrip transmutation" href="/grimoire/spells/mold-earth">Mold Earth</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid sorcerer warlock wizard cantrip conjuration" href="/grimoire/spells/poison-spray">Poison Spray</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard sorcerer warlock wizard cantrip transmutation" href="/grimoire/spells/prestidigitation">Prestidigitation</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid cantrip conjuration" href="/grimoire/spells/produce-flame">Produce Flame</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="sorcerer wizard cantrip evocation" href="/grimoire/spells/ray-of-frost">Ray of Frost</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="cleric druid cantrip abjuration" href="/grimoire/spells/resistance">Resistance</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="cleric cantrip evocation" href="/grimoire/spells/sacred-flame">Sacred Flame</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid sorcerer wizard cantrip transmutation" href="/grimoire/spells/shape-water">Shape Water</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid cantrip transmutation" href="/grimoire/spells/shillelagh">Shillelagh</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="sorcerer wizard cantrip evocation" href="/grimoire/spells/shocking-grasp">Shocking Grasp</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="cleric cantrip necromancy" href="/grimoire/spells/spare-the-dying">Spare the Dying</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="sorcerer warlock wizard cantrip conjuration" href="/grimoire/spells/sword-burst">Sword Burst</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="cleric cantrip transmutation" href="/grimoire/spells/thaumaturgy">Thaumaturgy</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid cantrip transmutation" href="/grimoire/spells/thorn-whip">Thorn Whip</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard druid sorcerer warlock wizard cantrip evocation" href="/grimoire/spells/thunderclap">Thunderclap</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard sorcerer warlock wizard cantrip divination" href="/grimoire/spells/true-strike">True Strike</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard cantrip enchantment" href="/grimoire/spells/vicious-mockery">Vicious Mockery</a>
+				</li>
+			</ul>
+			
+			
 			
 			
 			
@@ -731,6 +895,140 @@
 			
 			<a id="level1"></a>
 			<h2 class="post-list-head jetsHide">Level 1</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -1929,10 +2227,252 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<a class="post-meta jetsHide" href="#top">Back to top &#8593;</a>
 			
 			<a id="level3"></a>
 			<h2 class="post-list-head jetsHide">Level 3</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -2793,10 +3333,180 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<a class="post-meta jetsHide" href="#top">Back to top &#8593;</a>
 			
 			<a id="level5"></a>
 			<h2 class="post-list-head jetsHide">Level 5</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -3509,10 +4219,122 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<a class="post-meta jetsHide" href="#top">Back to top &#8593;</a>
 			
 			<a id="level7"></a>
 			<h2 class="post-list-head jetsHide">Level 7</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -3869,10 +4691,80 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<a class="post-meta jetsHide" href="#top">Back to top &#8593;</a>
 			
 			<a id="level9"></a>
 			<h2 class="post-list-head jetsHide">Level 9</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			

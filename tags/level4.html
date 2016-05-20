@@ -13,6 +13,7 @@
     <link rel="canonical" href="http://ephe.github.io/grimoire/tags/level4">
     <script src="http://use.typekit.net/nra6zxt.js"></script>
     <script src="/grimoire/js/jets.min.js"></script>
+	<link media="all" href="https://use.typekit.net/c/655870/1w;calluna,2,b4p:P:i4,b4t:P:i7,b4m:P:n3,b4n:P:n4,b4s:P:n7/l" rel="stylesheet">
     <script>try{Typekit.load();}catch(e){}</script>
     <script type="text/javascript">
     	function menuClick() {
@@ -24,8 +25,54 @@
     		}
   		}
 
+        function schoolClick(e) {
+            var schools = Array.prototype.slice.call(document.querySelectorAll('.spell-school:not([name="all"])')),
+                selected = e.target,
+                tags = [];
+
+            if (selected.nodeName !== 'A') return;
+            if (selected.name == 'all') {
+                selected.classList.add('selected');
+                schools.forEach(function(school) {
+                    school.classList.remove('selected');
+                });
+            }
+            else {
+                document.querySelector('.spell-school[name="all"]').classList.remove('selected');
+                selected.classList.toggle('selected');
+                tags = Array.prototype.slice.call(document.querySelectorAll('.spell-school.selected')).map(function(el) { return el.name; });
+            }
+
+            filterSpells(tags);
+        }
+
+        /**
+         * Hide/show spells based on presence of at least one of the given tags.
+         */
+        function filterSpells(tags) {
+            var spells = document.querySelectorAll('.post-list li'),
+                selector,
+                unselected
+
+            // Start by making previously hidden spells visible again
+            // (this does not conflict with jets search filtering)
+            Array.prototype.slice.call(spells).forEach(function(spell) {
+                spell.style.display = '';
+            });
+
+            if (tags.length == 0) return;
+
+            // Hide all spells where all of the given tags are not present
+            selector = tags.map(function(tag) { return ':not([tags~="' + tag + '"])'; });
+            unselected = document.querySelectorAll('.post-list .post-link' + selector.join(''));
+            Array.prototype.slice.call(unselected).forEach(function(spell) {
+                spell.parentNode.style.display = 'none';
+            });
+        }
+
   		window.onload = function(){
         document.getElementById("menuIcon").addEventListener( 'click' , menuClick );
+        document.querySelector(".schools-list").addEventListener( 'click', schoolClick );
 	    }
     </script>
 </head>
@@ -118,6 +165,45 @@
 					<a href="#level9">Level 9</a>
 				</dd>
 				
+			</dl>
+			<dl class="schools-list">
+				<dt>Spell schools:</dt>
+					<dd>
+						<a class="spell-school selected" name="all">All</a>
+					</dd> |
+					
+					<dd>
+						<a class="spell-school" name="abjuration">Abjuration</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="conjuration">Conjuration</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="divination">Divination</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="enchantment">Enchantment</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="evocation">Evocation</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="illusion">Illusion</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="necromancy">Necromancy</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="transmutaion">Transmutation</a>
+					</dd>
+					
 			</dl>
 
 			
@@ -493,10 +579,222 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<a class="post-meta jetsHide" href="#top">Back to top &#8593;</a>
 			
 			<a id="level1"></a>
 			<h2 class="post-list-head jetsHide">Level 1</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -1695,10 +1993,252 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<a class="post-meta jetsHide" href="#top">Back to top &#8593;</a>
 			
 			<a id="level3"></a>
 			<h2 class="post-list-head jetsHide">Level 3</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -2229,99 +2769,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/arcane-eye">Arcane Eye</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/aura-of-life">Aura of Life</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/aura-of-purity">Aura of Purity</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/banishment">Banishment</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/blight">Blight</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/compulsion">Compulsion</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/confusion">Confusion</a>
+					<a class="post-link" tags="wizard level4 divination" href="/grimoire/spells/arcane-eye">Arcane Eye</a>
 				</li>
 			</ul>
 			
@@ -2335,7 +2783,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/conjure-minor-elementals">Conjure Minor Elementals</a>
+					<a class="post-link" tags="paladin level4 abjuration" href="/grimoire/spells/aura-of-life">Aura of Life</a>
 				</li>
 			</ul>
 			
@@ -2349,251 +2797,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/conjure-woodland-beings">Conjure Woodland Beings</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/control-water">Control Water</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/death-ward">Death Ward</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/dimension-door">Dimension Door</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/divination">Divination</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/dominate-beast">Dominate Beast</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/elemental-bane">Elemental Bane</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/evards-black-tentacles">Evard's Black Tentacles</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/fabricate">Fabricate</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/fire-shield">Fire Shield</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/freedom-of-movement">Freedom of Movement</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/giant-insect">Giant Insect</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/grasping-vine">Grasping Vine</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/greater-invisibility">Greater Invisibility</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/guardian-of-faith">Guardian of Faith</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/hallucinatory-terrain">Hallucinatory Terrain</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/ice-storm">Ice Storm</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/leomunds-secret-chest">Leomund's Secret Chest</a>
+					<a class="post-link" tags="paladin level4 abjuration" href="/grimoire/spells/aura-of-purity">Aura of Purity</a>
 				</li>
 			</ul>
 			
@@ -2615,55 +2819,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/locate-creature">Locate Creature</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/mordenkainens-faithful-hound">Mordenkainen's Faithful Hound</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/mordenkainens-private-sanctum">Mordenkainen's Private Sanctum</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/otilukes-resilient-sphere">Otiluke's Resilient Sphere</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/phantasmal-killer">Phantasmal Killer</a>
+					<a class="post-link" tags="cleric paladin sorcerer warlock wizard level4 abjuration" href="/grimoire/spells/banishment">Banishment</a>
 				</li>
 			</ul>
 			
@@ -2679,21 +2835,11 @@
 			
 			
 			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/polymorph">Polymorph</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
 			
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/staggering-smite">Staggering Smite</a>
+					<a class="post-link" tags="druid sorcerer warlock wizard level4 necromancy" href="/grimoire/spells/blight">Blight</a>
 				</li>
 			</ul>
 			
@@ -2705,11 +2851,61 @@
 			
 			
 			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard level4 enchantment" href="/grimoire/spells/compulsion">Compulsion</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/stone-shape">Stone Shape</a>
+					<a class="post-link" tags="bard druid sorcerer wizard level4 enchantment" href="/grimoire/spells/confusion">Confusion</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid wizard level4 conjuration" href="/grimoire/spells/conjure-minor-elementals">Conjure Minor Elementals</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid ranger level4 conjuration" href="/grimoire/spells/conjure-woodland-beings">Conjure Woodland Beings</a>
 				</li>
 			</ul>
 			
@@ -2727,35 +2923,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/stoneskin">Stoneskin</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/storm-sphere">Storm Sphere</a>
-				</li>
-			</ul>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			<ul class="post-list jetsContent">
-				<li>
-					<a class="post-link" href="/grimoire/spells/vitriolic-sphere">Vitriolic Sphere</a>
+					<a class="post-link" tags="cleric druid wizard level4 transmutation" href="/grimoire/spells/control-water">Control Water</a>
 				</li>
 			</ul>
 			
@@ -2771,7 +2939,41 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/wall-of-fire">Wall of Fire</a>
+					<a class="post-link" tags="cleric paladin level4 abjuration" href="/grimoire/spells/death-ward">Death Ward</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard sorcerer warlock wizard level4 conjuration" href="/grimoire/spells/dimension-door">Dimension Door</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="cleric level4 divination" href="/grimoire/spells/divination">Divination</a>
 				</li>
 			</ul>
 			
@@ -2787,9 +2989,425 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/watery-sphere">Watery Sphere</a>
+					<a class="post-link" tags="druid sorcerer level4 enchantment" href="/grimoire/spells/dominate-beast">Dominate Beast</a>
 				</li>
 			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid warlock wizard level4 transmutation" href="/grimoire/spells/elemental-bane">Elemental Bane</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="wizard level4 conjuration" href="/grimoire/spells/evards-black-tentacles">Evard's Black Tentacles</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="wizard level4 transmutation" href="/grimoire/spells/fabricate">Fabricate</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="wizard level4 evocation" href="/grimoire/spells/fire-shield">Fire Shield</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard cleric druid ranger level4 abjuration" href="/grimoire/spells/freedom-of-movement">Freedom of Movement</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid level4 transmutation" href="/grimoire/spells/giant-insect">Giant Insect</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="ranger druid level4 conjuration" href="/grimoire/spells/grasping-vine">Grasping Vine</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="sorcerer wizard bard level4 illusion" href="/grimoire/spells/greater-invisibility">Greater Invisibility</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="cleric level4 conjuration" href="/grimoire/spells/guardian-of-faith">Guardian of Faith</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard druid warlock wizard level4 illusion" href="/grimoire/spells/hallucinatory-terrain">Hallucinatory Terrain</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid sorcerer wizard level4 evocation" href="/grimoire/spells/ice-storm">Ice Storm</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="wizard level4 conjuration" href="/grimoire/spells/leomunds-secret-chest">Leomund's Secret Chest</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard cleric druid paladin ranger wizard level4 divination" href="/grimoire/spells/locate-creature">Locate Creature</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="wizard level4 conjuration" href="/grimoire/spells/mordenkainens-faithful-hound">Mordenkainen's Faithful Hound</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="wizard level4 abjuration" href="/grimoire/spells/mordenkainens-private-sanctum">Mordenkainen's Private Sanctum</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="wizard level4 evocation" href="/grimoire/spells/otilukes-resilient-sphere">Otiluke's Resilient Sphere</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="wizard level4 illusion" href="/grimoire/spells/phantasmal-killer">Phantasmal Killer</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard druid sorcerer wizard level4 transmutation" href="/grimoire/spells/polymorph">Polymorph</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="paladin level4 evocation" href="/grimoire/spells/staggering-smite">Staggering Smite</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="cleric druid wizard level4 transmutation" href="/grimoire/spells/stone-shape">Stone Shape</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid sorcerer ranger wizard level4 abjuration" href="/grimoire/spells/stoneskin">Stoneskin</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="sorcerer wizard level4 evocation" href="/grimoire/spells/storm-sphere">Storm Sphere</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="sorcerer wizard level4 evocation" href="/grimoire/spells/vitriolic-sphere">Vitriolic Sphere</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid sorcerer wizard level4 evocation" href="/grimoire/spells/wall-of-fire">Wall of Fire</a>
+				</li>
+			</ul>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="druid sorcerer wizard level4 conjuration" href="/grimoire/spells/watery-sphere">Watery Sphere</a>
+				</li>
+			</ul>
+			
+			
 			
 			
 			
@@ -2797,6 +3415,98 @@
 			
 			<a id="level5"></a>
 			<h2 class="post-list-head jetsHide">Level 5</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -3509,10 +4219,122 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<a class="post-meta jetsHide" href="#top">Back to top &#8593;</a>
 			
 			<a id="level7"></a>
 			<h2 class="post-list-head jetsHide">Level 7</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -3869,10 +4691,80 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<a class="post-meta jetsHide" href="#top">Back to top &#8593;</a>
 			
 			<a id="level9"></a>
 			<h2 class="post-list-head jetsHide">Level 9</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			

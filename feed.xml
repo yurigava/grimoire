@@ -5,9 +5,9 @@
     <description>A searchable D&amp;D 5e spell list, sorted by class and level.</description>
     <link>http://ephe.github.io/grimoire/</link>
     <atom:link href="http://ephe.github.io/grimoire/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Fri, 18 Mar 2016 19:18:53 -0700</pubDate>
-    <lastBuildDate>Fri, 18 Mar 2016 19:18:53 -0700</lastBuildDate>
-    <generator>Jekyll v3.0.1</generator>
+    <pubDate>Fri, 20 May 2016 00:04:40 -0300</pubDate>
+    <lastBuildDate>Fri, 20 May 2016 00:04:40 -0300</lastBuildDate>
+    <generator>Jekyll v3.1.3</generator>
     
       <item>
         <title>Sword Burst</title>
@@ -25,7 +25,7 @@
 
 &lt;p&gt;This spell’s damage increases by 1d6 when you reach 5th level (2d6), 11th level (3d6), and 17th level (4d6).&lt;/p&gt;
 </description>
-        <pubDate>Mon, 07 Dec 2015 00:00:00 -0800</pubDate>
+        <pubDate>Mon, 07 Dec 2015 00:00:00 -0200</pubDate>
         <link>http://ephe.github.io/grimoire/spells/sword-burst</link>
         <guid isPermaLink="true">http://ephe.github.io/grimoire/spells/sword-burst</guid>
         
@@ -36,6 +36,8 @@
         <category>wizard</category>
         
         <category>cantrip</category>
+        
+        <category>conjuration</category>
         
         
         <category>spells</category>
@@ -58,7 +60,7 @@
 
 &lt;p&gt;This spell’s damage increases by 1d8 when you reach 5th level (2d8), 11th level (3d8), and 17th level (4d8).&lt;/p&gt;
 </description>
-        <pubDate>Mon, 07 Dec 2015 00:00:00 -0800</pubDate>
+        <pubDate>Mon, 07 Dec 2015 00:00:00 -0200</pubDate>
         <link>http://ephe.github.io/grimoire/spells/lightning-lure</link>
         <guid isPermaLink="true">http://ephe.github.io/grimoire/spells/lightning-lure</guid>
         
@@ -69,6 +71,8 @@
         <category>wizard</category>
         
         <category>cantrip</category>
+        
+        <category>evocation</category>
         
         
         <category>spells</category>
@@ -91,7 +95,7 @@
 
 &lt;p&gt;This spell’s damage increases when you reach higher levels. At 5th level, the melee attack deals an extra 1d8 fire damage to the target, and the fire damage to the second creature increases to 1d8 + your spellcasting ability modifier. Both damage rolls increase by 1d8 at 11th level and 17th level.&lt;/p&gt;
 </description>
-        <pubDate>Mon, 07 Dec 2015 00:00:00 -0800</pubDate>
+        <pubDate>Mon, 07 Dec 2015 00:00:00 -0200</pubDate>
         <link>http://ephe.github.io/grimoire/spells/green-flame-blade</link>
         <guid isPermaLink="true">http://ephe.github.io/grimoire/spells/green-flame-blade</guid>
         
@@ -102,6 +106,8 @@
         <category>wizard</category>
         
         <category>cantrip</category>
+        
+        <category>evocation</category>
         
         
         <category>spells</category>
@@ -124,7 +130,7 @@
 
 &lt;p&gt;This spell’s damage increases when you reach higher levels. At 5th level, the melee attack deals an extra 1d8 thunder damage to the target, and the damage the target takes for moving increases to 2d8. Both damage rolls increase by 1d8 at 11th level and 17th level.&lt;/p&gt;
 </description>
-        <pubDate>Mon, 07 Dec 2015 00:00:00 -0800</pubDate>
+        <pubDate>Mon, 07 Dec 2015 00:00:00 -0200</pubDate>
         <link>http://ephe.github.io/grimoire/spells/booming-blade</link>
         <guid isPermaLink="true">http://ephe.github.io/grimoire/spells/booming-blade</guid>
         
@@ -135,6 +141,8 @@
         <category>wizard</category>
         
         <category>cantrip</category>
+        
+        <category>evocation</category>
         
         
         <category>spells</category>
@@ -155,13 +163,15 @@
 
 &lt;p&gt;You conjure up a wall of swirling sand on the ground at a point you can see within range. You can make the wall up to 30 feet long, 10 feet high, and 10 feet thick, and it vanishes when the spell ends. It blocks line of sight but not movement. A creature is blinded while in the wall’s space and must spend 3 feet of movement for every 1 foot it moves there.&lt;/p&gt;
 </description>
-        <pubDate>Sun, 22 Nov 2015 00:00:00 -0800</pubDate>
+        <pubDate>Sun, 22 Nov 2015 00:00:00 -0200</pubDate>
         <link>http://ephe.github.io/grimoire/spells/wall-of-sand</link>
         <guid isPermaLink="true">http://ephe.github.io/grimoire/spells/wall-of-sand</guid>
         
         <category>wizard</category>
         
         <category>level3</category>
+        
+        <category>evocation</category>
         
         
         <category>spells</category>
@@ -184,7 +194,7 @@
 
 &lt;p&gt;&lt;strong&gt;At Higher Levels.&lt;/strong&gt; When you cast this spell using a spell slot of 5th level or higher, the initial damage increases by 2d4 for each slot level above 4th.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 20 Nov 2015 00:00:00 -0800</pubDate>
+        <pubDate>Fri, 20 Nov 2015 00:00:00 -0200</pubDate>
         <link>http://ephe.github.io/grimoire/spells/vitriolic-sphere</link>
         <guid isPermaLink="true">http://ephe.github.io/grimoire/spells/vitriolic-sphere</guid>
         
@@ -193,6 +203,8 @@
         <category>wizard</category>
         
         <category>level4</category>
+        
+        <category>evocation</category>
         
         
         <category>spells</category>
@@ -219,7 +231,7 @@
 
 &lt;p&gt;&lt;strong&gt;At Higher Levels.&lt;/strong&gt; When you cast this spell using a spell slot of 5th level or higher, the damage increases for each of its effects by 1d6 for each slot level above 4th.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 20 Nov 2015 00:00:00 -0800</pubDate>
+        <pubDate>Fri, 20 Nov 2015 00:00:00 -0200</pubDate>
         <link>http://ephe.github.io/grimoire/spells/storm-sphere</link>
         <guid isPermaLink="true">http://ephe.github.io/grimoire/spells/storm-sphere</guid>
         
@@ -228,6 +240,8 @@
         <category>wizard</category>
         
         <category>level4</category>
+        
+        <category>evocation</category>
         
         
         <category>spells</category>
@@ -250,7 +264,7 @@
 
 &lt;p&gt;&lt;strong&gt;At Higher Levels.&lt;/strong&gt; When you cast this spell using a spell slot of 4th level or higher, the number of meteors created increases by two for each slot level above 3rd.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 20 Nov 2015 00:00:00 -0800</pubDate>
+        <pubDate>Fri, 20 Nov 2015 00:00:00 -0200</pubDate>
         <link>http://ephe.github.io/grimoire/spells/melfs-minute-meteors</link>
         <guid isPermaLink="true">http://ephe.github.io/grimoire/spells/melfs-minute-meteors</guid>
         
@@ -259,6 +273,8 @@
         <category>wizard</category>
         
         <category>level3</category>
+        
+        <category>evocation</category>
         
         
         <category>spells</category>
@@ -281,7 +297,7 @@
 
 &lt;p&gt;If damage from this spell reduces a target to 0 hit points, the target is turned to ash.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 20 Nov 2015 00:00:00 -0800</pubDate>
+        <pubDate>Fri, 20 Nov 2015 00:00:00 -0200</pubDate>
         <link>http://ephe.github.io/grimoire/spells/immolation</link>
         <guid isPermaLink="true">http://ephe.github.io/grimoire/spells/immolation</guid>
         
@@ -290,6 +306,8 @@
         <category>wizard</category>
         
         <category>level5</category>
+        
+        <category>evocation</category>
         
         
         <category>spells</category>
@@ -310,7 +328,7 @@
 
 &lt;p&gt;You draw the moisture from every creature in a 30-foot cube centered on a point you choose within range. Each creature in that area must make a Constitution saving throw. Constructs and undead aren’t affected, and plants and water elementals make this saving throw with disadvantage. A creature takes 10d8 necrotic damage on a failed save, or half as much damage on a successful one.&lt;/p&gt;
 </description>
-        <pubDate>Fri, 20 Nov 2015 00:00:00 -0800</pubDate>
+        <pubDate>Fri, 20 Nov 2015 00:00:00 -0200</pubDate>
         <link>http://ephe.github.io/grimoire/spells/abi-dalzims-horrid-wilting</link>
         <guid isPermaLink="true">http://ephe.github.io/grimoire/spells/abi-dalzims-horrid-wilting</guid>
         
@@ -319,6 +337,8 @@
         <category>wizard</category>
         
         <category>level8</category>
+        
+        <category>necromancy</category>
         
         
         <category>spells</category>

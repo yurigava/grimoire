@@ -292,17 +292,23 @@ pre {
   font-size: 36px;
   margin-top: 7px; }
 
-dl.tag-list {
+dl.tag-list, dl.schools-list {
   display: inline-block;
   margin: 0; }
-  dl.tag-list dt {
+  dl.tag-list dt, dl.schools-list dt {
     font-weight: bold;
     display: inline-block;
     color: #424242;
     padding-right: 20px; }
-  dl.tag-list dd {
+  dl.tag-list dd, dl.schools-list dd {
     display: inline;
     padding-right: 20px; }
+
+dl.schools-list dd a {
+  color: #424242;
+  border-radius: 4px; }
+dl.schools-list dd a.selected {
+  color: #4D96B9; }
 
 .post-list-head {
   font-size: 22px;
@@ -328,7 +334,7 @@ dl.tag-list {
   color: #828282; }
 .class-list h3 {
   margin-top: 30px; }
-.class-list .tag-list dt, .class-list .tag-list dd {
+.class-list .tag-list dt, .class-list dl.schools-list dt, .class-list .tag-list dd, .class-list dl.schools-list dd {
   margin-left: 0; }
 
 @media screen and (max-width: 750px) {

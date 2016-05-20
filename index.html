@@ -13,6 +13,7 @@
     <link rel="canonical" href="http://ephe.github.io/grimoire/">
     <script src="http://use.typekit.net/nra6zxt.js"></script>
     <script src="/grimoire/js/jets.min.js"></script>
+	<link media="all" href="https://use.typekit.net/c/655870/1w;calluna,2,b4p:P:i4,b4t:P:i7,b4m:P:n3,b4n:P:n4,b4s:P:n7/l" rel="stylesheet">
     <script>try{Typekit.load();}catch(e){}</script>
     <script type="text/javascript">
     	function menuClick() {
@@ -24,8 +25,54 @@
     		}
   		}
 
+        function schoolClick(e) {
+            var schools = Array.prototype.slice.call(document.querySelectorAll('.spell-school:not([name="all"])')),
+                selected = e.target,
+                tags = [];
+
+            if (selected.nodeName !== 'A') return;
+            if (selected.name == 'all') {
+                selected.classList.add('selected');
+                schools.forEach(function(school) {
+                    school.classList.remove('selected');
+                });
+            }
+            else {
+                document.querySelector('.spell-school[name="all"]').classList.remove('selected');
+                selected.classList.toggle('selected');
+                tags = Array.prototype.slice.call(document.querySelectorAll('.spell-school.selected')).map(function(el) { return el.name; });
+            }
+
+            filterSpells(tags);
+        }
+
+        /**
+         * Hide/show spells based on presence of at least one of the given tags.
+         */
+        function filterSpells(tags) {
+            var spells = document.querySelectorAll('.post-list li'),
+                selector,
+                unselected
+
+            // Start by making previously hidden spells visible again
+            // (this does not conflict with jets search filtering)
+            Array.prototype.slice.call(spells).forEach(function(spell) {
+                spell.style.display = '';
+            });
+
+            if (tags.length == 0) return;
+
+            // Hide all spells where all of the given tags are not present
+            selector = tags.map(function(tag) { return ':not([tags~="' + tag + '"])'; });
+            unselected = document.querySelectorAll('.post-list .post-link' + selector.join(''));
+            Array.prototype.slice.call(unselected).forEach(function(spell) {
+                spell.parentNode.style.display = 'none';
+            });
+        }
+
   		window.onload = function(){
         document.getElementById("menuIcon").addEventListener( 'click' , menuClick );
+        document.querySelector(".schools-list").addEventListener( 'click', schoolClick );
 	    }
     </script>
 </head>
@@ -121,6 +168,45 @@
     </dd>
     
   </dl>
+  <dl class="schools-list">
+    <dt>Spell schools:</dt>
+      <dd>
+        <a class="spell-school selected" name="all">All</a>
+      </dd> |
+    
+      <dd>
+        <a class="spell-school" name="abjuration">Abjuration</a>
+      </dd>
+    
+      <dd>
+        <a class="spell-school" name="conjuration">Conjuration</a>
+      </dd>
+    
+      <dd>
+        <a class="spell-school" name="divination">Divination</a>
+      </dd>
+    
+      <dd>
+        <a class="spell-school" name="enchantment">Enchantment</a>
+      </dd>
+    
+      <dd>
+        <a class="spell-school" name="evocation">Evocation</a>
+      </dd>
+    
+      <dd>
+        <a class="spell-school" name="illusion">Illusion</a>
+      </dd>
+    
+      <dd>
+        <a class="spell-school" name="necromancy">Necromancy</a>
+      </dd>
+    
+      <dd>
+        <a class="spell-school" name="transmutaion">Transmutation</a>
+      </dd>
+    
+  </dl>
   
     <a id="cantrip"></a>
     <h2 class="post-list-head jetsHide">Cantrips</h2>
@@ -128,159 +214,159 @@
       
       
         <li>
-            <a class="post-link" href="/grimoire/spells/acid-splash">Acid Splash</a>
+            <a class="post-link" tags="sorcerer wizard cantrip conjuration" href="/grimoire/spells/acid-splash">Acid Splash</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/blade-ward">Blade Ward</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard cantrip abjuration" href="/grimoire/spells/blade-ward">Blade Ward</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/booming-blade">Booming Blade</a>
+            <a class="post-link" tags="sorcerer warlock wizard cantrip evocation" href="/grimoire/spells/booming-blade">Booming Blade</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/chill-touch">Chill Touch</a>
+            <a class="post-link" tags="sorcerer warlock wizard cantrip necromancy" href="/grimoire/spells/chill-touch">Chill Touch</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/control-flames">Control Flames</a>
+            <a class="post-link" tags="druid sorcerer wizard cantrip transmutation" href="/grimoire/spells/control-flames">Control Flames</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/create-bonfire">Create Bonfire</a>
+            <a class="post-link" tags="druid sorcerer warlock wizard cantrip conjuration" href="/grimoire/spells/create-bonfire">Create Bonfire</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/dancing-lights">Dancing Lights</a>
+            <a class="post-link" tags="bard sorcerer wizard cantrip evocation" href="/grimoire/spells/dancing-lights">Dancing Lights</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/druidcraft">Druidcraft</a>
+            <a class="post-link" tags="druid cantrip transmutation" href="/grimoire/spells/druidcraft">Druidcraft</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/eldritch-blast">Eldritch Blast</a>
+            <a class="post-link" tags="warlock cantrip evocation" href="/grimoire/spells/eldritch-blast">Eldritch Blast</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/fire-bolt">Fire Bolt</a>
+            <a class="post-link" tags="sorcerer wizard cantrip evocation" href="/grimoire/spells/fire-bolt">Fire Bolt</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/friends">Friends</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard cantrip enchantment" href="/grimoire/spells/friends">Friends</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/frostbite">Frostbite</a>
+            <a class="post-link" tags="druid sorcerer warlock wizard cantrip evocation" href="/grimoire/spells/frostbite">Frostbite</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/green-flame-blade">Green-Flame Blade</a>
+            <a class="post-link" tags="sorcerer warlock wizard cantrip evocation" href="/grimoire/spells/green-flame-blade">Green-Flame Blade</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/guidance">Guidance</a>
+            <a class="post-link" tags="cleric druid cantrip divination" href="/grimoire/spells/guidance">Guidance</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/gust">Gust</a>
+            <a class="post-link" tags="druid sorcerer wizard cantrip transmutation" href="/grimoire/spells/gust">Gust</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/light">Light</a>
+            <a class="post-link" tags="bard cleric sorcerer wizard cantrip evocation" href="/grimoire/spells/light">Light</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/lightning-lure">Lightning Lure</a>
+            <a class="post-link" tags="sorcerer warlock wizard cantrip evocation" href="/grimoire/spells/lightning-lure">Lightning Lure</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mage-hand">Mage Hand</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard cantrip conjuration" href="/grimoire/spells/mage-hand">Mage Hand</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/magic-stone">Magic Stone</a>
+            <a class="post-link" tags="druid warlock cantrip transmutation" href="/grimoire/spells/magic-stone">Magic Stone</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mending">Mending</a>
+            <a class="post-link" tags="bard cleric druid sorcerer wizard cantrip transmutation" href="/grimoire/spells/mending">Mending</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/message">Message</a>
+            <a class="post-link" tags="bard sorcerer wizard cantrip transmutation" href="/grimoire/spells/message">Message</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/minor-illusion">Minor Illusion</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard cantrip illusion" href="/grimoire/spells/minor-illusion">Minor Illusion</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mold-earth">Mold Earth</a>
+            <a class="post-link" tags="druid sorcerer wizard cantrip transmutation" href="/grimoire/spells/mold-earth">Mold Earth</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/poison-spray">Poison Spray</a>
+            <a class="post-link" tags="druid sorcerer warlock wizard cantrip conjuration" href="/grimoire/spells/poison-spray">Poison Spray</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/prestidigitation">Prestidigitation</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard cantrip transmutation" href="/grimoire/spells/prestidigitation">Prestidigitation</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/produce-flame">Produce Flame</a>
+            <a class="post-link" tags="druid cantrip conjuration" href="/grimoire/spells/produce-flame">Produce Flame</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/ray-of-frost">Ray of Frost</a>
+            <a class="post-link" tags="sorcerer wizard cantrip evocation" href="/grimoire/spells/ray-of-frost">Ray of Frost</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/resistance">Resistance</a>
+            <a class="post-link" tags="cleric druid cantrip abjuration" href="/grimoire/spells/resistance">Resistance</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/sacred-flame">Sacred Flame</a>
+            <a class="post-link" tags="cleric cantrip evocation" href="/grimoire/spells/sacred-flame">Sacred Flame</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/shape-water">Shape Water</a>
+            <a class="post-link" tags="druid sorcerer wizard cantrip transmutation" href="/grimoire/spells/shape-water">Shape Water</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/shillelagh">Shillelagh</a>
+            <a class="post-link" tags="druid cantrip transmutation" href="/grimoire/spells/shillelagh">Shillelagh</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/shocking-grasp">Shocking Grasp</a>
+            <a class="post-link" tags="sorcerer wizard cantrip evocation" href="/grimoire/spells/shocking-grasp">Shocking Grasp</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/spare-the-dying">Spare the Dying</a>
+            <a class="post-link" tags="cleric cantrip necromancy" href="/grimoire/spells/spare-the-dying">Spare the Dying</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/sword-burst">Sword Burst</a>
+            <a class="post-link" tags="sorcerer warlock wizard cantrip conjuration" href="/grimoire/spells/sword-burst">Sword Burst</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/thaumaturgy">Thaumaturgy</a>
+            <a class="post-link" tags="cleric cantrip transmutation" href="/grimoire/spells/thaumaturgy">Thaumaturgy</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/thorn-whip">Thorn Whip</a>
+            <a class="post-link" tags="druid cantrip transmutation" href="/grimoire/spells/thorn-whip">Thorn Whip</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/thunderclap">Thunderclap</a>
+            <a class="post-link" tags="bard druid sorcerer warlock wizard cantrip evocation" href="/grimoire/spells/thunderclap">Thunderclap</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/true-strike">True Strike</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard cantrip divination" href="/grimoire/spells/true-strike">True Strike</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/vicious-mockery">Vicious Mockery</a>
+            <a class="post-link" tags="bard cantrip enchantment" href="/grimoire/spells/vicious-mockery">Vicious Mockery</a>
         </li>
       
     </ul>
@@ -292,271 +378,271 @@
       
       
         <li>
-            <a class="post-link" href="/grimoire/spells/absorb-elements">Absorb Elements</a>
+            <a class="post-link" tags="druid ranger wizard level1 abjuration" href="/grimoire/spells/absorb-elements">Absorb Elements</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/alarm">Alarm</a>
+            <a class="post-link" tags="ranger wizard level1 abjuration" href="/grimoire/spells/alarm">Alarm</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/animal-friendship">Animal Friendship</a>
+            <a class="post-link" tags="bard druid ranger level1 enchantment" href="/grimoire/spells/animal-friendship">Animal Friendship</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/armor-of-agathys">Armor of Agathys</a>
+            <a class="post-link" tags="warlock level1 abjuration" href="/grimoire/spells/armor-of-agathys">Armor of Agathys</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/arms-of-hadar">Arms of Hadar</a>
+            <a class="post-link" tags="warlock level1 conjuration" href="/grimoire/spells/arms-of-hadar">Arms of Hadar</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/bane">Bane</a>
+            <a class="post-link" tags="bard cleric level1 enchantment" href="/grimoire/spells/bane">Bane</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/beast-bond">Beast Bond</a>
+            <a class="post-link" tags="druid ranger level1 divination" href="/grimoire/spells/beast-bond">Beast Bond</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/bless">Bless</a>
+            <a class="post-link" tags="cleric paladin level1 enchantment" href="/grimoire/spells/bless">Bless</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/burning-hands">Burning Hands</a>
+            <a class="post-link" tags="sorcerer wizard level1 evocation" href="/grimoire/spells/burning-hands">Burning Hands</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/catapult">Catapult</a>
+            <a class="post-link" tags="sorcerer wizard level1 transmutation" href="/grimoire/spells/catapult">Catapult</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/charm-person">Charm Person</a>
+            <a class="post-link" tags="bard cleric (trickery) druid sorcerer warlock wizard level1 enchantment" href="/grimoire/spells/charm-person">Charm Person</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/chromatic-orb">Chromatic Orb</a>
+            <a class="post-link" tags="sorcerer wizard level1 evocation" href="/grimoire/spells/chromatic-orb">Chromatic Orb</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/color-spray">Color Spray</a>
+            <a class="post-link" tags="sorcerer wizard level1 illusion" href="/grimoire/spells/color-spray">Color Spray</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/command">Command</a>
+            <a class="post-link" tags="cleric paladin level1 enchantment" href="/grimoire/spells/command">Command</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/compelled-duel">Compelled Duel</a>
+            <a class="post-link" tags="paladin level1 enchantment" href="/grimoire/spells/compelled-duel">Compelled Duel</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/comprehend-languages">Comprehend Languages</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level1 divination" href="/grimoire/spells/comprehend-languages">Comprehend Languages</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/create-or-destroy-water">Create or Destroy Water</a>
+            <a class="post-link" tags="cleric druid level1 transmutation" href="/grimoire/spells/create-or-destroy-water">Create or Destroy Water</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/cure-wounds">Cure Wounds</a>
+            <a class="post-link" tags="bard cleric druid paladin ranger level1 evocation" href="/grimoire/spells/cure-wounds">Cure Wounds</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/detect-evil-and-good">Detect Evil and Good</a>
+            <a class="post-link" tags="cleric paladin level1 divination" href="/grimoire/spells/detect-evil-and-good">Detect Evil and Good</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/detect-magic">Detect Magic</a>
+            <a class="post-link" tags="bard cleric druid paladin ranger sorcerer wizard level1 divination" href="/grimoire/spells/detect-magic">Detect Magic</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/detect-poison-and-disease">Detect Poison and Disease</a>
+            <a class="post-link" tags="cleric druid paladin ranger level1 divination" href="/grimoire/spells/detect-poison-and-disease">Detect Poison and Disease</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/disguise-self">Disguise Self</a>
+            <a class="post-link" tags="bard cleric (trickery) sorcerer wizard level1 illusion" href="/grimoire/spells/disguise-self">Disguise Self</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/dissonant-whispers">Dissonant Whispers</a>
+            <a class="post-link" tags="bard level1 enchantment" href="/grimoire/spells/dissonant-whispers">Dissonant Whispers</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/divine-favor">Divine Favor</a>
+            <a class="post-link" tags="paladin level1 evocation" href="/grimoire/spells/divine-favor">Divine Favor</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/earth-tremor">Earth Tremor</a>
+            <a class="post-link" tags="bard druid sorcerer wizard level1 evocation" href="/grimoire/spells/earth-tremor">Earth Tremor</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/ensnaring-strike">Ensnaring Strike</a>
+            <a class="post-link" tags="ranger level1 conjuration" href="/grimoire/spells/ensnaring-strike">Ensnaring Strike</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/entangle">Entangle</a>
+            <a class="post-link" tags="druid level1 conjuration" href="/grimoire/spells/entangle">Entangle</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/expeditious-retreat">Expeditious Retreat</a>
+            <a class="post-link" tags="sorcerer warlock wizard level1 transmutation" href="/grimoire/spells/expeditious-retreat">Expeditious Retreat</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/faerie-fire">Faerie Fire</a>
+            <a class="post-link" tags="bard druid level1 evocation" href="/grimoire/spells/faerie-fire">Faerie Fire</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/false-life">False Life</a>
+            <a class="post-link" tags="sorcerer wizard level1 necromancy" href="/grimoire/spells/false-life">False Life</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/feather-fall">Feather Fall</a>
+            <a class="post-link" tags="bard sorcerer wizard level1 transmutation" href="/grimoire/spells/feather-fall">Feather Fall</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/find-familiar">Find Familiar</a>
+            <a class="post-link" tags="wizard level1 conjuration" href="/grimoire/spells/find-familiar">Find Familiar</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/fog-cloud">Fog Cloud</a>
+            <a class="post-link" tags="druid ranger sorcerer wizard level1 conjuration" href="/grimoire/spells/fog-cloud">Fog Cloud</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/goodberry">Goodberry</a>
+            <a class="post-link" tags="druid ranger level1 transmutation" href="/grimoire/spells/goodberry">Goodberry</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/grease">Grease</a>
+            <a class="post-link" tags="wizard level1 conjuration" href="/grimoire/spells/grease">Grease</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/guiding-bolt">Guiding Bolt</a>
+            <a class="post-link" tags="cleric level1 evocation" href="/grimoire/spells/guiding-bolt">Guiding Bolt</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/hail-of-thorns">Hail of Thorns</a>
+            <a class="post-link" tags="ranger level1 conjuration" href="/grimoire/spells/hail-of-thorns">Hail of Thorns</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/healing-word">Healing Word</a>
+            <a class="post-link" tags="bard cleric druid level1 evocation" href="/grimoire/spells/healing-word">Healing Word</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/hellish-rebuke">Hellish Rebuke</a>
+            <a class="post-link" tags="warlock level1 evocation" href="/grimoire/spells/hellish-rebuke">Hellish Rebuke</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/heroism">Heroism</a>
+            <a class="post-link" tags="bard paladin level1 enchantment" href="/grimoire/spells/heroism">Heroism</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/hex">Hex</a>
+            <a class="post-link" tags="warlock level1 enchantment" href="/grimoire/spells/hex">Hex</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/hunters-mark">Hunter's Mark</a>
+            <a class="post-link" tags="ranger level1 divination" href="/grimoire/spells/hunters-mark">Hunter's Mark</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/ice-knife">Ice Knife</a>
+            <a class="post-link" tags="druid sorcerer wizard level1 conjuration" href="/grimoire/spells/ice-knife">Ice Knife</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/identify">Identify</a>
+            <a class="post-link" tags="bard wizard level1 divination" href="/grimoire/spells/identify">Identify</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/illusory-script">Illusory Script</a>
+            <a class="post-link" tags="bard warlock wizard level1 illusion" href="/grimoire/spells/illusory-script">Illusory Script</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/inflict-wounds">Inflict Wounds</a>
+            <a class="post-link" tags="cleric level1 necromancy" href="/grimoire/spells/inflict-wounds">Inflict Wounds</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/jump">Jump</a>
+            <a class="post-link" tags="druid ranger sorcerer wizard level1 transmutation" href="/grimoire/spells/jump">Jump</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/longstrider">Longstrider</a>
+            <a class="post-link" tags="bard druid ranger wizard level1 transmutation" href="/grimoire/spells/longstrider">Longstrider</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mage-armor">Mage Armor</a>
+            <a class="post-link" tags="sorcerer wizard level1 abjuration" href="/grimoire/spells/mage-armor">Mage Armor</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/magic-missile">Magic Missile</a>
+            <a class="post-link" tags="sorcerer wizard level1 evocation" href="/grimoire/spells/magic-missile">Magic Missile</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/protection-from-evil-and-good">Protection from Evil and Good</a>
+            <a class="post-link" tags="cleric paladin warlock wizard level1 abjuration" href="/grimoire/spells/protection-from-evil-and-good">Protection from Evil and Good</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/purify-food-and-drink">Purify Food and Drink</a>
+            <a class="post-link" tags="cleric druid paladin level1 transmutation" href="/grimoire/spells/purify-food-and-drink">Purify Food and Drink</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/ray-of-sickness">Ray of Sickness</a>
+            <a class="post-link" tags="sorcerer wizard level1 necromancy" href="/grimoire/spells/ray-of-sickness">Ray of Sickness</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/sanctuary">Sanctuary</a>
+            <a class="post-link" tags="cleric level1 abjuration" href="/grimoire/spells/sanctuary">Sanctuary</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/searing-smite">Searing Smite</a>
+            <a class="post-link" tags="paladin level1 evocation" href="/grimoire/spells/searing-smite">Searing Smite</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/shield">Shield</a>
+            <a class="post-link" tags="sorcerer wizard level1 abjuration" href="/grimoire/spells/shield">Shield</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/shield-of-faith">Shield of Faith</a>
+            <a class="post-link" tags="cleric paladin level1 abjuration" href="/grimoire/spells/shield-of-faith">Shield of Faith</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/silent-image">Silent Image</a>
+            <a class="post-link" tags="bard sorcerer wizard level1 illusion" href="/grimoire/spells/silent-image">Silent Image</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/sleep">Sleep</a>
+            <a class="post-link" tags="bard sorcerer wizard level1 enchantment" href="/grimoire/spells/sleep">Sleep</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/speak-with-animals">Speak with Animals</a>
+            <a class="post-link" tags="bard druid ranger level1 divination" href="/grimoire/spells/speak-with-animals">Speak with Animals</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/tashas-hideous-laughter">Tasha's Hideous Laughter</a>
+            <a class="post-link" tags="bard wizard level1 enchantment" href="/grimoire/spells/tashas-hideous-laughter">Tasha's Hideous Laughter</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/tensers-floating-disk">Tenser's Floating Disk</a>
+            <a class="post-link" tags="wizard level1 conjuration" href="/grimoire/spells/tensers-floating-disk">Tenser's Floating Disk</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/thunderous-smite">Thunderous Smite</a>
+            <a class="post-link" tags="paladin level1 evocation" href="/grimoire/spells/thunderous-smite">Thunderous Smite</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/thunderwave">Thunderwave</a>
+            <a class="post-link" tags="bard druid sorcerer wizard level1 evocation" href="/grimoire/spells/thunderwave">Thunderwave</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/unseen-servant">Unseen Servant</a>
+            <a class="post-link" tags="bard warlock wizard level1 conjuration" href="/grimoire/spells/unseen-servant">Unseen Servant</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/witch-bolt">Witch Bolt</a>
+            <a class="post-link" tags="sorcerer warlock wizard level1 evocation" href="/grimoire/spells/witch-bolt">Witch Bolt</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/wrathful-smite">Wrathful Smite</a>
+            <a class="post-link" tags="paladin level1 evocation" href="/grimoire/spells/wrathful-smite">Wrathful Smite</a>
         </li>
       
     </ul>
@@ -568,271 +654,275 @@
       
       
         <li>
-            <a class="post-link" href="/grimoire/spells/aganazzars-scorcher">Aganazzar's Scorcher</a>
+            <a class="post-link" tags="sorcerer wizard level2 evocation" href="/grimoire/spells/aganazzars-scorcher">Aganazzar's Scorcher</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/aid">Aid</a>
+            <a class="post-link" tags="cleric paladin level2 abjuration" href="/grimoire/spells/aid">Aid</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/alter-self">Alter Self</a>
+            <a class="post-link" tags="sorcerer wizard level2 transmutation" href="/grimoire/spells/alter-self">Alter Self</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/animal-messenger">Animal Messenger</a>
+            <a class="post-link" tags="bard druid ranger level2 enchantment" href="/grimoire/spells/animal-messenger">Animal Messenger</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/arcane-lock">Arcane Lock</a>
+            <a class="post-link" tags="wizard level2 abjuration" href="/grimoire/spells/arcane-lock">Arcane Lock</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/augury">Augury</a>
+            <a class="post-link" tags="cleric level2 divination" href="/grimoire/spells/augury">Augury</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/barkskin">Barkskin</a>
+            <a class="post-link" tags="druid ranger level2 transmutation" href="/grimoire/spells/barkskin">Barkskin</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/beast-sense">Beast Sense</a>
+            <a class="post-link" tags="druid ranger level2 divination" href="/grimoire/spells/beast-sense">Beast Sense</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/blindnessdeafness">Blindness/Deafness</a>
+            <a class="post-link" tags="bard cleric sorcerer wizard level2 necromancy" href="/grimoire/spells/blindnessdeafness">Blindness/Deafness</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/blur">Blur</a>
+            <a class="post-link" tags="sorcerer wizard level2 illusion" href="/grimoire/spells/blur">Blur</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/branding-smite">Branding Smite</a>
+            <a class="post-link" tags="paladin level2 evocation" href="/grimoire/spells/branding-smite">Branding Smite</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/calm-emotions">Calm Emotions</a>
+            <a class="post-link" tags="bard cleric level2 enchantment" href="/grimoire/spells/calm-emotions">Calm Emotions</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/cloud-of-daggers">Cloud of Daggers</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level2 conjuration" href="/grimoire/spells/cloud-of-daggers">Cloud of Daggers</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/continual-flame">Continual Flame</a>
+            <a class="post-link" tags="cleric wizard level2 evocation" href="/grimoire/spells/continual-flame">Continual Flame</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/cordon-of-arrows">Cordon Of Arrows</a>
+            <a class="post-link" tags="ranger level2 transmutation" href="/grimoire/spells/cordon-of-arrows">Cordon Of Arrows</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/crown-of-madness">Crown of Madness</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level2 enchantment" href="/grimoire/spells/crown-of-madness">Crown of Madness</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/darkness">Darkness</a>
+            <a class="post-link" tags="sorcerer warlock wizard level2 evocation" href="/grimoire/spells/darkness">Darkness</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/darkvision">Darkvision</a>
+            <a class="post-link" tags="druid ranger sorcerer wizard level2 transmutation" href="/grimoire/spells/darkvision">Darkvision</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/detect-thoughts">Detect Thoughts</a>
+            <a class="post-link" tags="bard sorcerer wizard level2 divination" href="/grimoire/spells/detect-thoughts">Detect Thoughts</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/dust-devil">Dust Devil</a>
+            <a class="post-link" tags="druid sorcerer wizard level2 conjuration" href="/grimoire/spells/dust-devil">Dust Devil</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/earthbind">Earthbind</a>
+            <a class="post-link" tags="druid sorcerer warlock wizard level2 transmutation" href="/grimoire/spells/earthbind">Earthbind</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/enhance-ability">Enhance Ability</a>
+            <a class="post-link" tags="bard cleric druid sorcerer level2 transmutation" href="/grimoire/spells/enhance-ability">Enhance Ability</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/enlarge-reduce">Enlarge/Reduce</a>
+            <a class="post-link" tags="sorcerer wizard level2 transmutation" href="/grimoire/spells/enlarge-reduce">Enlarge/Reduce</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/enthrall">Enthrall</a>
+            <a class="post-link" tags="bard warlock level2 enchantment" href="/grimoire/spells/enthrall">Enthrall</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/find-steed">Find Steed</a>
+            <a class="post-link" tags="paladin level2 conjuration" href="/grimoire/spells/find-steed">Find Steed</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/find-traps">Find Traps</a>
+            <a class="post-link" tags="cleric druid ranger level2 divination" href="/grimoire/spells/find-traps">Find Traps</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/flame-blade">Flame Blade</a>
+            <a class="post-link" tags="druid level2 evocation" href="/grimoire/spells/flame-blade">Flame Blade</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/flaming-sphere">Flaming Sphere</a>
+            <a class="post-link" tags="druid wizard level2 conjuration" href="/grimoire/spells/flaming-sphere">Flaming Sphere</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/gentle-repose">Gentle Repose</a>
+            <a class="post-link" tags="cleric wizard level2 necromancy" href="/grimoire/spells/gentle-repose">Gentle Repose</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/gust-of-wind">Gust of Wind</a>
+            <a class="post-link" tags="sorcerer wizard druid level2 evocation" href="/grimoire/spells/gust-of-wind">Gust of Wind</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/heat-metal">Heat Metal</a>
+            <a class="post-link" tags="druid bard level2 transmutation" href="/grimoire/spells/heat-metal">Heat Metal</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/hold-person">Hold Person</a>
+            <a class="post-link" tags="bard cleric druid sorcerer warlock wizard level2 divination" href="/grimoire/spells/hold-person">Hold Person</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/invisibility">Invisibility</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level2 illusion" href="/grimoire/spells/invisibility">Invisibility</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/knock">Knock</a>
+            <a class="post-link" tags="sorcerer wizard bard level2 transmutation" href="/grimoire/spells/knock">Knock</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/lesser-restoration">Lesser Restoration</a>
+            <a class="post-link" tags="bard cleric druid paladin ranger level2 abjuration" href="/grimoire/spells/lesser-restoration">Lesser Restoration</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/levitate">Levitate</a>
+            <a class="post-link" tags="sorcerer wizard level2 transmutation" href="/grimoire/spells/levitate">Levitate</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/locate-animals-or-plants">Locate Animals or Plants</a>
+            <a class="post-link" tags="bard druid ranger level2 divination" href="/grimoire/spells/locate-animals-or-plants">Locate Animals or Plants</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/locate-object">Locate Object</a>
+            <a class="post-link" tags="bard cleric druid paladin ranger wizard level2 divination" href="/grimoire/spells/locate-object">Locate Object</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/magic-mouth">Magic Mouth</a>
+            <a class="post-link" tags="bard wizard level2 illusion" href="/grimoire/spells/magic-mouth">Magic Mouth</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/magic-weapon">Magic Weapon</a>
+            <a class="post-link" tags="paladin wizard level2 transmutation" href="/grimoire/spells/magic-weapon">Magic Weapon</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/maximilians-earthen-grasp">Maximilian's Earthen Grasp</a>
+            <a class="post-link" tags="sorcerer wizard level2 transmutation" href="/grimoire/spells/maximilians-earthen-grasp">Maximilian's Earthen Grasp</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/melfs-acid-arrow">Melf's Acid Arrow</a>
+            <a class="post-link" tags="wizard level2 evocation" href="/grimoire/spells/melfs-acid-arrow">Melf's Acid Arrow</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mirror-image">Mirror Image</a>
+            <a class="post-link" tags="sorcerer warlock wizard level2 illusion" href="/grimoire/spells/mirror-image">Mirror Image</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/misty-step">Misty Step</a>
+            <a class="post-link" tags="sorcerer warlock wizard level2 conjuration" href="/grimoire/spells/misty-step">Misty Step</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/moonbeam">Moonbeam</a>
+            <a class="post-link" tags="druid level2 evocation" href="/grimoire/spells/moonbeam">Moonbeam</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/nystuls-magic-aura">Nystul's Magic Aura</a>
+            <a class="post-link" tags="wizard level2 illusion" href="/grimoire/spells/nystuls-magic-aura">Nystul's Magic Aura</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/pass-without-trace">Pass Without Trace</a>
+            <a class="post-link" tags="druid ranger level2 abjuration" href="/grimoire/spells/pass-without-trace">Pass Without Trace</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/phantasmal-force">Phantasmal Force</a>
+            <a class="post-link" tags="bard sorcerer wizard level2 illusion" href="/grimoire/spells/phantasmal-force">Phantasmal Force</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/prayer-of-healing">Prayer of Healing</a>
+            <a class="post-link" tags="cleric level2 evocation" href="/grimoire/spells/prayer-of-healing">Prayer of Healing</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/protection-from-poison">Protection from Poison</a>
+            <a class="post-link" tags="cleric ranger paladin druid level2 abjuration" href="/grimoire/spells/protection-from-poison">Protection from Poison</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/pyrotechnics">Pyrotechnics</a>
+            <a class="post-link" tags="bard sorcerer wizard level2 transmutation" href="/grimoire/spells/pyrotechnics">Pyrotechnics</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/ray-of-enfeeblement">Ray of Enfeeblement</a>
+            <a class="post-link" tags="warlock wizard level2 necromancy" href="/grimoire/spells/ray-of-enfeeblement">Ray of Enfeeblement</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/rope-trick">Rope Trick</a>
+            <a class="post-link" tags="wizard level2 transmutation" href="/grimoire/spells/rope-trick">Rope Trick</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/scorching-ray">Scorching Ray</a>
+            <a class="post-link" tags="sorcerer wizard level2 evocation" href="/grimoire/spells/scorching-ray">Scorching Ray</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/see-invisibility">See Invisibility</a>
+            <a class="post-link" tags="bard sorcerer wizard level2 divination" href="/grimoire/spells/see-invisibility">See Invisibility</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/shatter">Shatter</a>
+            <a class="post-link" tags="sorcerer warlock wizard level2 evocation" href="/grimoire/spells/shatter">Shatter</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/silence">Silence</a>
+            <a class="post-link" tags="bard cleric ranger level2 illusion" href="/grimoire/spells/silence">Silence</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/skywrite">Skywrite</a>
+            <a class="post-link" tags="bard druid wizard level2 transmutation" href="/grimoire/spells/skywrite">Skywrite</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/snillocs-snowball-swarm">Snilloc's Snowball Swarm</a>
+            <a class="post-link" tags="sorcerer wizard level2 evocation" href="/grimoire/spells/snillocs-snowball-swarm">Snilloc's Snowball Swarm</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/spider-climb">Spider Climb</a>
+            <a class="post-link" tags="sorcerer warlock wizard level2 transmutation" href="/grimoire/spells/spider-climb">Spider Climb</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/spike-growth">Spike Growth</a>
+            <a class="post-link" tags="druid ranger level2 transmutation" href="/grimoire/spells/spike-growth">Spike Growth</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/spiritual-weapon">Spiritual Weapon</a>
+            <a class="post-link" tags="cleric level2 evocation" href="/grimoire/spells/spiritual-weapon">Spiritual Weapon</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/suggestion">Suggestion</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level2 enchantment" href="/grimoire/spells/suggestion">Suggestion</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/warding-bond">Warding Bond</a>
+            <a class="post-link" tags="cleric level2 abjuration" href="/grimoire/spells/warding-bond">Warding Bond</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/warding-wind">Warding Wind</a>
+            <a class="post-link" tags="bard druid sorcerer level2 evocation" href="/grimoire/spells/warding-wind">Warding Wind</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/web">Web</a>
+            <a class="post-link" tags="cleric druid ranger sorcerer level2 transmutation" href="/grimoire/spells/water-walk">Water Walk</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/zone-of-truth">Zone of Truth</a>
+            <a class="post-link" tags="sorcerer wizard level2 conjuration" href="/grimoire/spells/web">Web</a>
+        </li>
+      
+        <li>
+            <a class="post-link" tags="bard cleric paladin level2 enchantment" href="/grimoire/spells/zone-of-truth">Zone of Truth</a>
         </li>
       
     </ul>
@@ -844,227 +934,223 @@
       
       
         <li>
-            <a class="post-link" href="/grimoire/spells/animate-dead">Animate Dead</a>
+            <a class="post-link" tags="cleric wizard level3 necromancy" href="/grimoire/spells/animate-dead">Animate Dead</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/aura-of-vitality">Aura Of Vitality</a>
+            <a class="post-link" tags="paladin level3 evocation" href="/grimoire/spells/aura-of-vitality">Aura Of Vitality</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/beacon-of-hope">Beacon of Hope</a>
+            <a class="post-link" tags="cleric level3 abjuration" href="/grimoire/spells/beacon-of-hope">Beacon of Hope</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/bestow-curse">Bestow Curse</a>
+            <a class="post-link" tags="bard cleric wizard level3 necromancy" href="/grimoire/spells/bestow-curse">Bestow Curse</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/blinding-smite">Blinding Smite</a>
+            <a class="post-link" tags="paladin level3 evocation" href="/grimoire/spells/blinding-smite">Blinding Smite</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/blink">Blink</a>
+            <a class="post-link" tags="sorcerer wizard level3 transmutation" href="/grimoire/spells/blink">Blink</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/call-lightning">Call Lightning</a>
+            <a class="post-link" tags="druid level3 conjuration" href="/grimoire/spells/call-lightning">Call Lightning</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/clairvoyance">Clairvoyance</a>
+            <a class="post-link" tags="bard cleric sorcerer wizard level3 divination" href="/grimoire/spells/clairvoyance">Clairvoyance</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/conjure-animals">Conjure Animals</a>
+            <a class="post-link" tags="druid ranger level3 conjuration" href="/grimoire/spells/conjure-animals">Conjure Animals</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/conjure-barrage">Conjure Barrage</a>
+            <a class="post-link" tags="ranger level3 conjuration" href="/grimoire/spells/conjure-barrage">Conjure Barrage</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/counterspell">Counterspell</a>
+            <a class="post-link" tags="sorcerer warlock wizard level3 abjuration" href="/grimoire/spells/counterspell">Counterspell</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/create-food-and-water">Create Food and Water</a>
+            <a class="post-link" tags="cleric paladin level3 conjuration" href="/grimoire/spells/create-food-and-water">Create Food and Water</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/crusaders-mantle">Crusader's Mantle</a>
+            <a class="post-link" tags="paladin level3 evocation" href="/grimoire/spells/crusaders-mantle">Crusader's Mantle</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/daylight">Daylight</a>
+            <a class="post-link" tags="cleric druid paladin ranger sorcerer level3 evocation" href="/grimoire/spells/daylight">Daylight</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/dispel-magic">Dispel Magic</a>
+            <a class="post-link" tags="bard cleric druid paladin sorcerer warlock wizard level3 abjuration" href="/grimoire/spells/dispel-magic">Dispel Magic</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/elemental-weapon">Elemental Weapon</a>
+            <a class="post-link" tags="paladin level3 transmutation" href="/grimoire/spells/elemental-weapon">Elemental Weapon</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/erupting-earth">Erupting Earth</a>
+            <a class="post-link" tags="druid sorcerer wizard level3 transmutation" href="/grimoire/spells/erupting-earth">Erupting Earth</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/fear">Fear</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level3 illusion" href="/grimoire/spells/fear">Fear</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/feign-death">Feign Death</a>
+            <a class="post-link" tags="bard cleric druid wizard level3 necromancy" href="/grimoire/spells/feign-death">Feign Death</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/fireball">Fireball</a>
+            <a class="post-link" tags="sorcerer wizard level3 evocation" href="/grimoire/spells/fireball">Fireball</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/flame-arrows">Flame Arrows</a>
+            <a class="post-link" tags="druid ranger sorcerer wizard level3 transmutation" href="/grimoire/spells/flame-arrows">Flame Arrows</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/fly">Fly</a>
+            <a class="post-link" tags="sorcerer warlock wizard level3 transmutation" href="/grimoire/spells/fly">Fly</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/gaseous-form">Gaseous Form</a>
+            <a class="post-link" tags="sorcerer wizard level3 transmutation" href="/grimoire/spells/gaseous-form">Gaseous Form</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/glyph-of-warding">Glyph of Warding</a>
+            <a class="post-link" tags="cleric wizard bard level3 abjuration" href="/grimoire/spells/glyph-of-warding">Glyph of Warding</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/haste">Haste</a>
+            <a class="post-link" tags="sorcerer wizard level3 transmutation" href="/grimoire/spells/haste">Haste</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/hunger-of-hadar">Hunger of Hadar</a>
+            <a class="post-link" tags="warlock level3 conjuration" href="/grimoire/spells/hunger-of-hadar">Hunger of Hadar</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/hypnotic-pattern">Hypnotic Pattern</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level3 illusion" href="/grimoire/spells/hypnotic-pattern">Hypnotic Pattern</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/leomunds-tiny-hut">Leomund's Tiny Hut</a>
+            <a class="post-link" tags="bard wizard level3 evocation" href="/grimoire/spells/leomunds-tiny-hut">Leomund's Tiny Hut</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/lightning-arrow">Lightning Arrow</a>
+            <a class="post-link" tags="ranger level3 transmutation" href="/grimoire/spells/lightning-arrow">Lightning Arrow</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/lightning-bolt">Lightning Bolt</a>
+            <a class="post-link" tags="sorcerer wizard level3 evocation" href="/grimoire/spells/lightning-bolt">Lightning Bolt</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/magic-circle">Magic Circle</a>
+            <a class="post-link" tags="cleric paladin warlock wizard level3 abjuration" href="/grimoire/spells/magic-circle">Magic Circle</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/major-image">Major Image</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level3 illusion" href="/grimoire/spells/major-image">Major Image</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mass-healing-word">Mass Healing Word</a>
+            <a class="post-link" tags="cleric level3 evocation" href="/grimoire/spells/mass-healing-word">Mass Healing Word</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/meld-into-stone">Meld Into Stone</a>
+            <a class="post-link" tags="cleric druid level3 transmutation" href="/grimoire/spells/meld-into-stone">Meld Into Stone</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/melfs-minute-meteors">Melf's Minute Meteors</a>
+            <a class="post-link" tags="sorcerer wizard level3 evocation" href="/grimoire/spells/melfs-minute-meteors">Melf's Minute Meteors</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/nondetection">Nondetection</a>
+            <a class="post-link" tags="bard cleric ranger level3 abjuration" href="/grimoire/spells/nondetection">Nondetection</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/phantom-steed">Phantom Steed</a>
+            <a class="post-link" tags="wizard level3 illusion" href="/grimoire/spells/phantom-steed">Phantom Steed</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/plant-growth">Plant Growth</a>
+            <a class="post-link" tags="bard druid ranger level3 transmutation" href="/grimoire/spells/plant-growth">Plant Growth</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/protection-from-energy">Protection from Energy</a>
+            <a class="post-link" tags="cleric druid ranger sorcerer wizard level3 abjuration" href="/grimoire/spells/protection-from-energy">Protection from Energy</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/remove-curse">Remove Curse</a>
+            <a class="post-link" tags="cleric paladin warlock wizard level3 abjuration" href="/grimoire/spells/remove-curse">Remove Curse</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/revivify">Revivify</a>
+            <a class="post-link" tags="cleric paladin level3 conjuration" href="/grimoire/spells/revivify">Revivify</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/sending">Sending</a>
+            <a class="post-link" tags="bard cleric wizard level3 evocation" href="/grimoire/spells/sending">Sending</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/sleet-storm">Sleet Storm</a>
+            <a class="post-link" tags="druid sorcerer wizard level3 conjuration" href="/grimoire/spells/sleet-storm">Sleet Storm</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/slow">Slow</a>
+            <a class="post-link" tags="sorcerer wizard level3 transmutation" href="/grimoire/spells/slow">Slow</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/speak-with-dead">Speak with Dead</a>
+            <a class="post-link" tags="bard cleric level3 necromancy" href="/grimoire/spells/speak-with-dead">Speak with Dead</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/speak-with-plants">Speak with Plants</a>
+            <a class="post-link" tags="bard druid ranger level3 transmutation" href="/grimoire/spells/speak-with-plants">Speak with Plants</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/spirit-guardians">Spirit Guardians</a>
+            <a class="post-link" tags="cleric level3 conjuration" href="/grimoire/spells/spirit-guardians">Spirit Guardians</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/stinking-cloud">Stinking Cloud</a>
+            <a class="post-link" tags="bard sorcerer wizard level3 conjuration" href="/grimoire/spells/stinking-cloud">Stinking Cloud</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/tidal-wave">Tidal Wave</a>
+            <a class="post-link" tags="druid wizard level3 conjuration" href="/grimoire/spells/tidal-wave">Tidal Wave</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/tongues">Tongues</a>
+            <a class="post-link" tags="bard cleric sorcerer warlock wizard level3 divination" href="/grimoire/spells/tongues">Tongues</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/vampiric-touch">Vampiric Touch</a>
+            <a class="post-link" tags="warlock wizard level3 necromancy" href="/grimoire/spells/vampiric-touch">Vampiric Touch</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/wall-of-sand">Wall of Sand</a>
+            <a class="post-link" tags="wizard level3 evocation" href="/grimoire/spells/wall-of-sand">Wall of Sand</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/wall-of-water">Wall of Water</a>
+            <a class="post-link" tags="druid sorcerer wizard level3 evocation" href="/grimoire/spells/wall-of-water">Wall of Water</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/water-breathing">Water Breathing</a>
+            <a class="post-link" tags="druid ranger sorcerer wizard level3 transmutation" href="/grimoire/spells/water-breathing">Water Breathing</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/water-walk">Water Walk</a>
-        </li>
-      
-        <li>
-            <a class="post-link" href="/grimoire/spells/wind-wall">Wind Wall</a>
+            <a class="post-link" tags="druid ranger level3 evocation" href="/grimoire/spells/wind-wall">Wind Wall</a>
         </li>
       
     </ul>
@@ -1076,159 +1162,159 @@
       
       
         <li>
-            <a class="post-link" href="/grimoire/spells/arcane-eye">Arcane Eye</a>
+            <a class="post-link" tags="wizard level4 divination" href="/grimoire/spells/arcane-eye">Arcane Eye</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/aura-of-life">Aura of Life</a>
+            <a class="post-link" tags="paladin level4 abjuration" href="/grimoire/spells/aura-of-life">Aura of Life</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/aura-of-purity">Aura of Purity</a>
+            <a class="post-link" tags="paladin level4 abjuration" href="/grimoire/spells/aura-of-purity">Aura of Purity</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/banishment">Banishment</a>
+            <a class="post-link" tags="cleric paladin sorcerer warlock wizard level4 abjuration" href="/grimoire/spells/banishment">Banishment</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/blight">Blight</a>
+            <a class="post-link" tags="druid sorcerer warlock wizard level4 necromancy" href="/grimoire/spells/blight">Blight</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/compulsion">Compulsion</a>
+            <a class="post-link" tags="bard level4 enchantment" href="/grimoire/spells/compulsion">Compulsion</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/confusion">Confusion</a>
+            <a class="post-link" tags="bard druid sorcerer wizard level4 enchantment" href="/grimoire/spells/confusion">Confusion</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/conjure-minor-elementals">Conjure Minor Elementals</a>
+            <a class="post-link" tags="druid wizard level4 conjuration" href="/grimoire/spells/conjure-minor-elementals">Conjure Minor Elementals</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/conjure-woodland-beings">Conjure Woodland Beings</a>
+            <a class="post-link" tags="druid ranger level4 conjuration" href="/grimoire/spells/conjure-woodland-beings">Conjure Woodland Beings</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/control-water">Control Water</a>
+            <a class="post-link" tags="cleric druid wizard level4 transmutation" href="/grimoire/spells/control-water">Control Water</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/death-ward">Death Ward</a>
+            <a class="post-link" tags="cleric paladin level4 abjuration" href="/grimoire/spells/death-ward">Death Ward</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/dimension-door">Dimension Door</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level4 conjuration" href="/grimoire/spells/dimension-door">Dimension Door</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/divination">Divination</a>
+            <a class="post-link" tags="cleric level4 divination" href="/grimoire/spells/divination">Divination</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/dominate-beast">Dominate Beast</a>
+            <a class="post-link" tags="druid sorcerer level4 enchantment" href="/grimoire/spells/dominate-beast">Dominate Beast</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/elemental-bane">Elemental Bane</a>
+            <a class="post-link" tags="druid warlock wizard level4 transmutation" href="/grimoire/spells/elemental-bane">Elemental Bane</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/evards-black-tentacles">Evard's Black Tentacles</a>
+            <a class="post-link" tags="wizard level4 conjuration" href="/grimoire/spells/evards-black-tentacles">Evard's Black Tentacles</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/fabricate">Fabricate</a>
+            <a class="post-link" tags="wizard level4 transmutation" href="/grimoire/spells/fabricate">Fabricate</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/fire-shield">Fire Shield</a>
+            <a class="post-link" tags="wizard level4 evocation" href="/grimoire/spells/fire-shield">Fire Shield</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/freedom-of-movement">Freedom of Movement</a>
+            <a class="post-link" tags="bard cleric druid ranger level4 abjuration" href="/grimoire/spells/freedom-of-movement">Freedom of Movement</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/giant-insect">Giant Insect</a>
+            <a class="post-link" tags="druid level4 transmutation" href="/grimoire/spells/giant-insect">Giant Insect</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/grasping-vine">Grasping Vine</a>
+            <a class="post-link" tags="ranger druid level4 conjuration" href="/grimoire/spells/grasping-vine">Grasping Vine</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/greater-invisibility">Greater Invisibility</a>
+            <a class="post-link" tags="sorcerer wizard bard level4 illusion" href="/grimoire/spells/greater-invisibility">Greater Invisibility</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/guardian-of-faith">Guardian of Faith</a>
+            <a class="post-link" tags="cleric level4 conjuration" href="/grimoire/spells/guardian-of-faith">Guardian of Faith</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/hallucinatory-terrain">Hallucinatory Terrain</a>
+            <a class="post-link" tags="bard druid warlock wizard level4 illusion" href="/grimoire/spells/hallucinatory-terrain">Hallucinatory Terrain</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/ice-storm">Ice Storm</a>
+            <a class="post-link" tags="druid sorcerer wizard level4 evocation" href="/grimoire/spells/ice-storm">Ice Storm</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/leomunds-secret-chest">Leomund's Secret Chest</a>
+            <a class="post-link" tags="wizard level4 conjuration" href="/grimoire/spells/leomunds-secret-chest">Leomund's Secret Chest</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/locate-creature">Locate Creature</a>
+            <a class="post-link" tags="bard cleric druid paladin ranger wizard level4 divination" href="/grimoire/spells/locate-creature">Locate Creature</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mordenkainens-faithful-hound">Mordenkainen's Faithful Hound</a>
+            <a class="post-link" tags="wizard level4 conjuration" href="/grimoire/spells/mordenkainens-faithful-hound">Mordenkainen's Faithful Hound</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mordenkainens-private-sanctum">Mordenkainen's Private Sanctum</a>
+            <a class="post-link" tags="wizard level4 abjuration" href="/grimoire/spells/mordenkainens-private-sanctum">Mordenkainen's Private Sanctum</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/otilukes-resilient-sphere">Otiluke's Resilient Sphere</a>
+            <a class="post-link" tags="wizard level4 evocation" href="/grimoire/spells/otilukes-resilient-sphere">Otiluke's Resilient Sphere</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/phantasmal-killer">Phantasmal Killer</a>
+            <a class="post-link" tags="wizard level4 illusion" href="/grimoire/spells/phantasmal-killer">Phantasmal Killer</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/polymorph">Polymorph</a>
+            <a class="post-link" tags="bard druid sorcerer wizard level4 transmutation" href="/grimoire/spells/polymorph">Polymorph</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/staggering-smite">Staggering Smite</a>
+            <a class="post-link" tags="paladin level4 evocation" href="/grimoire/spells/staggering-smite">Staggering Smite</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/stone-shape">Stone Shape</a>
+            <a class="post-link" tags="cleric druid wizard level4 transmutation" href="/grimoire/spells/stone-shape">Stone Shape</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/stoneskin">Stoneskin</a>
+            <a class="post-link" tags="druid sorcerer ranger wizard level4 abjuration" href="/grimoire/spells/stoneskin">Stoneskin</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/storm-sphere">Storm Sphere</a>
+            <a class="post-link" tags="sorcerer wizard level4 evocation" href="/grimoire/spells/storm-sphere">Storm Sphere</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/vitriolic-sphere">Vitriolic Sphere</a>
+            <a class="post-link" tags="sorcerer wizard level4 evocation" href="/grimoire/spells/vitriolic-sphere">Vitriolic Sphere</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/wall-of-fire">Wall of Fire</a>
+            <a class="post-link" tags="druid sorcerer wizard level4 evocation" href="/grimoire/spells/wall-of-fire">Wall of Fire</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/watery-sphere">Watery Sphere</a>
+            <a class="post-link" tags="druid sorcerer wizard level4 conjuration" href="/grimoire/spells/watery-sphere">Watery Sphere</a>
         </li>
       
     </ul>
@@ -1240,187 +1326,187 @@
       
       
         <li>
-            <a class="post-link" href="/grimoire/spells/animate-objects">Animate Objects</a>
+            <a class="post-link" tags="bard sorcerer wizard level5 transmutation" href="/grimoire/spells/animate-objects">Animate Objects</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/antilife-shell">Antilife Shell</a>
+            <a class="post-link" tags="druid level5 abjuration" href="/grimoire/spells/antilife-shell">Antilife Shell</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/awaken">Awaken</a>
+            <a class="post-link" tags="bard druid level5 transmutation" href="/grimoire/spells/awaken">Awaken</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/banishing-smite">Banishing Smite</a>
+            <a class="post-link" tags="paladin level5 abjuration" href="/grimoire/spells/banishing-smite">Banishing Smite</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/bigbys-hand">Bigby's Hand</a>
+            <a class="post-link" tags="wizard level5 evocation" href="/grimoire/spells/bigbys-hand">Bigby's Hand</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/circle-of-power">Circle of Power</a>
+            <a class="post-link" tags="paladin level5 abjuration" href="/grimoire/spells/circle-of-power">Circle of Power</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/cloudkill">Cloudkill</a>
+            <a class="post-link" tags="sorcerer wizard level5 conjuration" href="/grimoire/spells/cloudkill">Cloudkill</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/commune">Commune</a>
+            <a class="post-link" tags="cleric level5 divination" href="/grimoire/spells/commune">Commune</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/commune-with-nature">Commune with Nature</a>
+            <a class="post-link" tags="druid ranger level5 divination" href="/grimoire/spells/commune-with-nature">Commune with Nature</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/cone-of-cold">Cone of Cold</a>
+            <a class="post-link" tags="sorcerer wizard level5 evocation" href="/grimoire/spells/cone-of-cold">Cone of Cold</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/conjure-elemental">Conjure Elemental</a>
+            <a class="post-link" tags="druid wizard level5 conjuration" href="/grimoire/spells/conjure-elemental">Conjure Elemental</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/conjure-volley">Conjure Volley</a>
+            <a class="post-link" tags="ranger level5 conjuration" href="/grimoire/spells/conjure-volley">Conjure Volley</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/contact-other-plane">Contact Other Plane</a>
+            <a class="post-link" tags="warlock wizard level5 divination" href="/grimoire/spells/contact-other-plane">Contact Other Plane</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/contagion">Contagion</a>
+            <a class="post-link" tags="cleric druid level5 necromancy" href="/grimoire/spells/contagion">Contagion</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/control-winds">Control Winds</a>
+            <a class="post-link" tags="druid sorcerer wizard level5 transmutation" href="/grimoire/spells/control-winds">Control Winds</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/creation">Creation</a>
+            <a class="post-link" tags="sorcerer wizard level5 illusion" href="/grimoire/spells/creation">Creation</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/destructive-wave">Destructive Wave</a>
+            <a class="post-link" tags="paladin level5 evocation" href="/grimoire/spells/destructive-wave">Destructive Wave</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/dispel-evil-and-good">Dispel Evil and Good</a>
+            <a class="post-link" tags="cleric paladin level5 abjuration" href="/grimoire/spells/dispel-evil-and-good">Dispel Evil and Good</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/dominate-person">Dominate Person</a>
+            <a class="post-link" tags="bard sorcerer wizard level5 enchantment" href="/grimoire/spells/dominate-person">Dominate Person</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/dream">Dream</a>
+            <a class="post-link" tags="bard warlock wizard level5 illusion" href="/grimoire/spells/dream">Dream</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/flame-strike">Flame Strike</a>
+            <a class="post-link" tags="cleric level5 evocation" href="/grimoire/spells/flame-strike">Flame Strike</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/geas">Geas</a>
+            <a class="post-link" tags="cleric wizard paladin druid bard level5 enchantment" href="/grimoire/spells/geas">Geas</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/greater-restoration">Greater Restoration</a>
+            <a class="post-link" tags="cleric druid bard level5 abjuration" href="/grimoire/spells/greater-restoration">Greater Restoration</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/hallow">Hallow</a>
+            <a class="post-link" tags="cleric level5 evocation" href="/grimoire/spells/hallow">Hallow</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/hold-monster">Hold Monster</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level5 enchantment" href="/grimoire/spells/hold-monster">Hold Monster</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/immolation">Immolation</a>
+            <a class="post-link" tags="sorcerer wizard level5 evocation" href="/grimoire/spells/immolation">Immolation</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/insect-plague">Insect Plague</a>
+            <a class="post-link" tags="cleric druid sorcerer level5 conjuration" href="/grimoire/spells/insect-plague">Insect Plague</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/legend-lore">Legend Lore</a>
+            <a class="post-link" tags="cleric wizard bard level5 divination" href="/grimoire/spells/legend-lore">Legend Lore</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/maelstrom">Maelstrom</a>
+            <a class="post-link" tags="druid level5 evocation" href="/grimoire/spells/maelstrom">Maelstrom</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mass-cure-wounds">Mass Cure Wounds</a>
+            <a class="post-link" tags="bard cleric druid level5 conjuration" href="/grimoire/spells/mass-cure-wounds">Mass Cure Wounds</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mislead">Mislead</a>
+            <a class="post-link" tags="bard wizard level5 illusion" href="/grimoire/spells/mislead">Mislead</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/modify-memory">Modify Memory</a>
+            <a class="post-link" tags="bard wizard level5 enchantment" href="/grimoire/spells/modify-memory">Modify Memory</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/passwall">Passwall</a>
+            <a class="post-link" tags="wizard level5 transmutation" href="/grimoire/spells/passwall">Passwall</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/planar-binding">Planar Binding</a>
+            <a class="post-link" tags="bard cleric druid wizard level5 abjuration" href="/grimoire/spells/planar-binding">Planar Binding</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/raise-dead">Raise Dead</a>
+            <a class="post-link" tags="cleric paladin bard level5 necromancy" href="/grimoire/spells/raise-dead">Raise Dead</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/rarys-telepathic-bond">Rary's Telepathic Bond</a>
+            <a class="post-link" tags="wizard level5 divination" href="/grimoire/spells/rarys-telepathic-bond">Rary's Telepathic Bond</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/reincarnate">Reincarnate</a>
+            <a class="post-link" tags="druid level5 transmutation" href="/grimoire/spells/reincarnate">Reincarnate</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/scrying">Scrying</a>
+            <a class="post-link" tags="bard cleric druid warlock wizard level5 divination" href="/grimoire/spells/scrying">Scrying</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/seeming">Seeming</a>
+            <a class="post-link" tags="bard sorcerer wizard level5 illusion" href="/grimoire/spells/seeming">Seeming</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/swift-quiver">Swift Quiver</a>
+            <a class="post-link" tags="ranger level5 transmutation" href="/grimoire/spells/swift-quiver">Swift Quiver</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/telekinesis">Telekinesis</a>
+            <a class="post-link" tags="sorcerer wizard level5 transmutation" href="/grimoire/spells/telekinesis">Telekinesis</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/teleportation-circle">Teleportation Circle</a>
+            <a class="post-link" tags="bard sorcerer wizard level5 conjuration" href="/grimoire/spells/teleportation-circle">Teleportation Circle</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/transmute-rock">Transmute Rock</a>
+            <a class="post-link" tags="druid wizard level5 transmutation" href="/grimoire/spells/transmute-rock">Transmute Rock</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/tree-stride">Tree Stride</a>
+            <a class="post-link" tags="druid ranger level5 conjuration" href="/grimoire/spells/tree-stride">Tree Stride</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/wall-of-force">Wall of Force</a>
+            <a class="post-link" tags="wizard level5 evocation" href="/grimoire/spells/wall-of-force">Wall of Force</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/wall-of-stone">Wall of Stone</a>
+            <a class="post-link" tags="druid sorcerer wizard level5 evocation" href="/grimoire/spells/wall-of-stone">Wall of Stone</a>
         </li>
       
     </ul>
@@ -1432,159 +1518,155 @@
       
       
         <li>
-            <a class="post-link" href="/grimoire/spells/antilife-shell">Antilife Shell</a>
+            <a class="post-link" tags="sorcerer warlock wizard level6 conjuration" href="/grimoire/spells/arcane-gate">Arcane Gate</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/arcane-gate">Arcane Gate</a>
+            <a class="post-link" tags="cleric level6 evocation" href="/grimoire/spells/blade-barrier">Blade Barrier</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/blade-barrier">Blade Barrier</a>
+            <a class="post-link" tags="druid level6 transmutation" href="/grimoire/spells/bones-of-the-earth">Bones of the Earth</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/bones-of-the-earth">Bones of the Earth</a>
+            <a class="post-link" tags="sorcerer wizard level6 evocation" href="/grimoire/spells/chain-lightning">Chain Lightning</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/chain-lightning">Chain Lightning</a>
+            <a class="post-link" tags="sorcerer warlock wizard level6 necromancy" href="/grimoire/spells/circle-of-death">Circle of Death</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/circle-of-death">Circle of Death</a>
+            <a class="post-link" tags="druid warlock level6 conjuration" href="/grimoire/spells/conjure-fey">Conjure Fey</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/conjure-fey">Conjure Fey</a>
+            <a class="post-link" tags="wizard level6 evocation" href="/grimoire/spells/contingency">Contingency</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/contingency">Contingency</a>
+            <a class="post-link" tags="cleric warlock wizard level6 necromancy" href="/grimoire/spells/create-undead">Create Undead</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/create-undead">Create Undead</a>
+            <a class="post-link" tags="sorcerer wizard level6 transmutation" href="/grimoire/spells/disintegrate">Disintegrate</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/disintegrate">Disintegrate</a>
+            <a class="post-link" tags="wizard level6 conjuration" href="/grimoire/spells/drawmijs-instant-summons">Drawmij's Instant Summons</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/drawmijs-instant-summons">Drawmij's Instant Summons</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level6 necromancy" href="/grimoire/spells/eyebite">Eyebite</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/eyebite">Eyebite</a>
+            <a class="post-link" tags="bard cleric druid level6 divination" href="/grimoire/spells/find-the-path">Find the Path</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/find-the-path">Find the Path</a>
+            <a class="post-link" tags="warlock wizard level6 transmutation" href="/grimoire/spells/flesh-to-stone">Flesh to Stone</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/flesh-to-stone">Flesh to Stone</a>
+            <a class="post-link" tags="cleric level6 abjuration" href="/grimoire/spells/forbiddance">Forbiddance</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/forbiddance">Forbiddance</a>
+            <a class="post-link" tags="sorcerer wizard level6 abjuration" href="/grimoire/spells/globe-of-invulnerability">Globe of Invulnerability</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/globe-of-invulnerability">Globe of Invulnerability</a>
+            <a class="post-link" tags="wizard bard level6 abjuration" href="/grimoire/spells/guards-and-wards">Guards and Wards</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/guards-and-wards">Guards and Wards</a>
+            <a class="post-link" tags="cleric level6 necromancy" href="/grimoire/spells/harm">Harm</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/harm">Harm</a>
+            <a class="post-link" tags="cleric druid level6 evocation" href="/grimoire/spells/heal">Heal</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/heal">Heal</a>
+            <a class="post-link" tags="cleric druid level6 conjuration" href="/grimoire/spells/heroes-feast">Heroes' Feast</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/heroes-feast">Heroes' Feast</a>
+            <a class="post-link" tags="druid sorcerer warlock wizard level6 transmutation" href="/grimoire/spells/investiture-of-flame">Investiture of Flame</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/investiture-of-flame">Investiture of Flame</a>
+            <a class="post-link" tags="druid sorcerer warlock wizard level6 transmutation" href="/grimoire/spells/investiture-of-ice">Investiture of Ice</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/investiture-of-ice">Investiture of Ice</a>
+            <a class="post-link" tags="druid sorcerer warlock wizard level6 transmutation" href="/grimoire/spells/investiture-of-stone">Investiture of Stone</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/investiture-of-stone">Investiture of Stone</a>
+            <a class="post-link" tags="druid sorcerer warlock wizard level6 transmutation" href="/grimoire/spells/investiture-of-wind">Investiture of Wind</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/investiture-of-wind">Investiture of Wind</a>
+            <a class="post-link" tags="wizard level6 necromancy" href="/grimoire/spells/magic-jar">Magic Jar</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/magic-jar">Magic Jar</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level6 enchantment" href="/grimoire/spells/mass-suggestion">Mass Suggestion</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mass-suggestion">Mass Suggestion</a>
+            <a class="post-link" tags="druid sorcerer wizard level6 transmutation" href="/grimoire/spells/move-earth">Move Earth</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/move-earth">Move Earth</a>
+            <a class="post-link" tags="wizard level6 evocation" href="/grimoire/spells/otilukes-freezing-sphere">Otiluke's Freezing Sphere</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/otilukes-freezing-sphere">Otiluke's Freezing Sphere</a>
+            <a class="post-link" tags="bard wizard level6 enchantment" href="/grimoire/spells/ottos-irresistible-dance">Otto's Irresistible Dance</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/ottos-irresistible-dance">Otto's Irresistible Dance</a>
+            <a class="post-link" tags="cleric level6 conjuration" href="/grimoire/spells/planar-ally">Planar Ally</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/planar-ally">Planar Ally</a>
+            <a class="post-link" tags="druid level6 abjuration" href="/grimoire/spells/primordial-ward">Primordial Ward</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/primordial-ward">Primordial Ward</a>
+            <a class="post-link" tags="bard wizard level6 illusion" href="/grimoire/spells/programmed-illusion">Programmed Illusion</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/programmed-illusion">Programmed Illusion</a>
+            <a class="post-link" tags="druid sorcerer wizard level6 evocation" href="/grimoire/spells/sunbeam">Sunbeam</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/sunbeam">Sunbeam</a>
+            <a class="post-link" tags="druid level6 conjuration" href="/grimoire/spells/transport-via-plants">Transport via Plants</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/transport-via-plants">Transport via Plants</a>
+            <a class="post-link" tags="bard cleric sorcerer warlock wizard level6 divination" href="/grimoire/spells/true-seeing">True Seeing</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/true-seeing">True Seeing</a>
+            <a class="post-link" tags="wizard level6 evocation" href="/grimoire/spells/wall-of-ice">Wall of Ice</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/wall-of-ice">Wall of Ice</a>
+            <a class="post-link" tags="druid level6 conjuration" href="/grimoire/spells/wall-of-thorns">Wall of Thorns</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/wall-of-thorns">Wall of Thorns</a>
+            <a class="post-link" tags="druid level6 transmutation" href="/grimoire/spells/wind-walk">Wind Walk</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/wind-walk">Wind Walk</a>
-        </li>
-      
-        <li>
-            <a class="post-link" href="/grimoire/spells/word-of-recall">Word of Recall</a>
+            <a class="post-link" tags="cleric level6 conjuration" href="/grimoire/spells/word-of-recall">Word of Recall</a>
         </li>
       
     </ul>
@@ -1596,87 +1678,87 @@
       
       
         <li>
-            <a class="post-link" href="/grimoire/spells/conjure-celestial">Conjure Celestial</a>
+            <a class="post-link" tags="cleric level7 conjuration" href="/grimoire/spells/conjure-celestial">Conjure Celestial</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/delayed-blast-fireball">Delayed Blast Fireball</a>
+            <a class="post-link" tags="sorcerer wizard level7 evocation" href="/grimoire/spells/delayed-blast-fireball">Delayed Blast Fireball</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/divine-word">Divine Word</a>
+            <a class="post-link" tags="cleric level7 evocation" href="/grimoire/spells/divine-word">Divine Word</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/etherealness">Etherealness</a>
+            <a class="post-link" tags="bard cleric sorcerer warlock wizard level7 transmutation" href="/grimoire/spells/etherealness">Etherealness</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/finger-of-death">Finger of Death</a>
+            <a class="post-link" tags="sorcerer warlock wizard level7 necromancy" href="/grimoire/spells/finger-of-death">Finger of Death</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/fire-storm">Fire Storm</a>
+            <a class="post-link" tags="cleric druid sorcerer level7 evocation" href="/grimoire/spells/fire-storm">Fire Storm</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/forcecage">Forcecage</a>
+            <a class="post-link" tags="bard warlock wizard level7 evocation" href="/grimoire/spells/forcecage">Forcecage</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mirage-arcane">Mirage Arcane</a>
+            <a class="post-link" tags="bard druid wizard level7 illusion" href="/grimoire/spells/mirage-arcane">Mirage Arcane</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mordenkainens-magnificent-mansion">Mordenkainen's Magnificent Mansion</a>
+            <a class="post-link" tags="bard wizard level7 conjuration" href="/grimoire/spells/mordenkainens-magnificent-mansion">Mordenkainen's Magnificent Mansion</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mordenkainens-sword">Mordenkainen's Sword</a>
+            <a class="post-link" tags="bard wizard level7 evocation" href="/grimoire/spells/mordenkainens-sword">Mordenkainen's Sword</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/plane-shift">Plane Shift</a>
+            <a class="post-link" tags="cleric druid sorcerer warlock wizard level7 conjuration" href="/grimoire/spells/plane-shift">Plane Shift</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/prismatic-spray">Prismatic Spray</a>
+            <a class="post-link" tags="sorcerer wizard level7 evocation" href="/grimoire/spells/prismatic-spray">Prismatic Spray</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/project-image">Project Image</a>
+            <a class="post-link" tags="bard wizard level7 illusion" href="/grimoire/spells/project-image">Project Image</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/regenerate">Regenerate</a>
+            <a class="post-link" tags="bard cleric druid level7 transmutation" href="/grimoire/spells/regenerate">Regenerate</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/resurrection">Resurrection</a>
+            <a class="post-link" tags="bard cleric druid level7 necromancy" href="/grimoire/spells/resurrection">Resurrection</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/reverse-gravity">Reverse Gravity</a>
+            <a class="post-link" tags="druid sorcerer wizard level7 transmutation" href="/grimoire/spells/reverse-gravity">Reverse Gravity</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/sequester">Sequester</a>
+            <a class="post-link" tags="wizard level7 transmutation" href="/grimoire/spells/sequester">Sequester</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/simulacrum">Simulacrum</a>
+            <a class="post-link" tags="wizard level7 illusion" href="/grimoire/spells/simulacrum">Simulacrum</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/symbol">Symbol</a>
+            <a class="post-link" tags="bard wizard cleric level7 abjuration" href="/grimoire/spells/symbol">Symbol</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/teleport">Teleport</a>
+            <a class="post-link" tags="bard sorcerer wizard level7 conjuration" href="/grimoire/spells/teleport">Teleport</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/whirlwind">Whirlwind</a>
+            <a class="post-link" tags="druid wizard level7 evocation" href="/grimoire/spells/whirlwind">Whirlwind</a>
         </li>
       
     </ul>
@@ -1688,79 +1770,79 @@
       
       
         <li>
-            <a class="post-link" href="/grimoire/spells/abi-dalzims-horrid-wilting">Abi Dalzim's Horrid Wilting</a>
+            <a class="post-link" tags="sorcerer wizard level8 necromancy" href="/grimoire/spells/abi-dalzims-horrid-wilting">Abi Dalzim's Horrid Wilting</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/animal-shapes">Animal Shapes</a>
+            <a class="post-link" tags="druid level8 transmutation" href="/grimoire/spells/animal-shapes">Animal Shapes</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/antimagic-field">Antimagic Field</a>
+            <a class="post-link" tags="cleric wizard level8 abjuration" href="/grimoire/spells/antimagic-field">Antimagic Field</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/antipathy-sympathy">Antipathy/Sympathy</a>
+            <a class="post-link" tags="druid wizard level8 enchantment" href="/grimoire/spells/antipathy-sympathy">Antipathy/Sympathy</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/clone">Clone</a>
+            <a class="post-link" tags="wizard level8 necromancy" href="/grimoire/spells/clone">Clone</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/control-weather">Control Weather</a>
+            <a class="post-link" tags="cleric druid wizard level8 transmutation" href="/grimoire/spells/control-weather">Control Weather</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/demiplane">Demiplane</a>
+            <a class="post-link" tags="warlock wizard level8 conjuration" href="/grimoire/spells/demiplane">Demiplane</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/dominate-monster">Dominate Monster</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level8 enchantment" href="/grimoire/spells/dominate-monster">Dominate Monster</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/earthquake">Earthquake</a>
+            <a class="post-link" tags="cleric druid sorcerer level8 evocation" href="/grimoire/spells/earthquake">Earthquake</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/feeblemind">Feeblemind</a>
+            <a class="post-link" tags="bard druid warlock wizard level8 enchantment" href="/grimoire/spells/feeblemind">Feeblemind</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/glibness">Glibness</a>
+            <a class="post-link" tags="bard warlock level8 transmutation" href="/grimoire/spells/glibness">Glibness</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/holy-aura">Holy Aura</a>
+            <a class="post-link" tags="cleric level8 abjuration" href="/grimoire/spells/holy-aura">Holy Aura</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/incendiary-cloud">Incendiary Cloud</a>
+            <a class="post-link" tags="sorcerer wizard level8 conjuration" href="/grimoire/spells/incendiary-cloud">Incendiary Cloud</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/maze">Maze</a>
+            <a class="post-link" tags="wizard level8 maze" href="/grimoire/spells/maze">Maze</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mind-blank">Mind Blank</a>
+            <a class="post-link" tags="bard wizard level8 abjuration" href="/grimoire/spells/mind-blank">Mind Blank</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/power-word-stun">Power Word Stun</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level8 enchantment" href="/grimoire/spells/power-word-stun">Power Word Stun</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/sunburst">Sunburst</a>
+            <a class="post-link" tags="druid sorcerer wizard level8 evocation" href="/grimoire/spells/sunburst">Sunburst</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/telepathy">Telepathy</a>
+            <a class="post-link" tags="wizard level8 evocation" href="/grimoire/spells/telepathy">Telepathy</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/tsunami">Tsunami</a>
+            <a class="post-link" tags="druid level8 conjuration" href="/grimoire/spells/tsunami">Tsunami</a>
         </li>
       
     </ul>
@@ -1772,67 +1854,67 @@
       
       
         <li>
-            <a class="post-link" href="/grimoire/spells/astral-projection">Astral Projection</a>
+            <a class="post-link" tags="cleric warlock wizard level9 necromancy" href="/grimoire/spells/astral-projection">Astral Projection</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/foresight">Foresight</a>
+            <a class="post-link" tags="bard druid warlock wizard level9 divination" href="/grimoire/spells/foresight">Foresight</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/gate">Gate</a>
+            <a class="post-link" tags="cleric sorcerer wizard level9 conjuration" href="/grimoire/spells/gate">Gate</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/imprisonment">Imprisonment</a>
+            <a class="post-link" tags="warlock wizard level9 abjuration" href="/grimoire/spells/imprisonment">Imprisonment</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/mass-heal">Mass Heal</a>
+            <a class="post-link" tags="cleric level9 conjuration" href="/grimoire/spells/mass-heal">Mass Heal</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/meteor-swarm">Meteor Swarm</a>
+            <a class="post-link" tags="sorcerer wizard level9 evocation" href="/grimoire/spells/meteor-swarm">Meteor Swarm</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/power-word-heal">Power Word Heal</a>
+            <a class="post-link" tags="bard level9 evocation" href="/grimoire/spells/power-word-heal">Power Word Heal</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/power-word-kill">Power Word Kill</a>
+            <a class="post-link" tags="bard sorcerer warlock wizard level9 enchantment" href="/grimoire/spells/power-word-kill">Power Word Kill</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/prismatic-wall">Prismatic Wall</a>
+            <a class="post-link" tags="wizard level9 abjuration" href="/grimoire/spells/prismatic-wall">Prismatic Wall</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/shapechange">Shapechange</a>
+            <a class="post-link" tags="druid wizard level9 shapechange" href="/grimoire/spells/shapechange">Shapechange</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/storm-of-vengeance">Storm of Vengeance</a>
+            <a class="post-link" tags="druid level9 conjuration" href="/grimoire/spells/storm-of-vengeance">Storm of Vengeance</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/time-stop">Time Stop</a>
+            <a class="post-link" tags="sorcerer wizard level9 transmutation" href="/grimoire/spells/time-stop">Time Stop</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/true-polymorph">True Polymorph</a>
+            <a class="post-link" tags="bard warlock wizard level9 transmutation" href="/grimoire/spells/true-polymorph">True Polymorph</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/true-resurrection">True Resurrection</a>
+            <a class="post-link" tags="cleric druid level9 necromancy" href="/grimoire/spells/true-resurrection">True Resurrection</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/weird">Weird</a>
+            <a class="post-link" tags="wizard level9 illusion" href="/grimoire/spells/weird">Weird</a>
         </li>
       
         <li>
-            <a class="post-link" href="/grimoire/spells/wish">Wish</a>
+            <a class="post-link" tags="sorcerer wizard level9 conjuration" href="/grimoire/spells/wish">Wish</a>
         </li>
       
     </ul>

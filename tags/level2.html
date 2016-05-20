@@ -13,6 +13,7 @@
     <link rel="canonical" href="http://ephe.github.io/grimoire/tags/level2">
     <script src="http://use.typekit.net/nra6zxt.js"></script>
     <script src="/grimoire/js/jets.min.js"></script>
+	<link media="all" href="https://use.typekit.net/c/655870/1w;calluna,2,b4p:P:i4,b4t:P:i7,b4m:P:n3,b4n:P:n4,b4s:P:n7/l" rel="stylesheet">
     <script>try{Typekit.load();}catch(e){}</script>
     <script type="text/javascript">
     	function menuClick() {
@@ -24,8 +25,54 @@
     		}
   		}
 
+        function schoolClick(e) {
+            var schools = Array.prototype.slice.call(document.querySelectorAll('.spell-school:not([name="all"])')),
+                selected = e.target,
+                tags = [];
+
+            if (selected.nodeName !== 'A') return;
+            if (selected.name == 'all') {
+                selected.classList.add('selected');
+                schools.forEach(function(school) {
+                    school.classList.remove('selected');
+                });
+            }
+            else {
+                document.querySelector('.spell-school[name="all"]').classList.remove('selected');
+                selected.classList.toggle('selected');
+                tags = Array.prototype.slice.call(document.querySelectorAll('.spell-school.selected')).map(function(el) { return el.name; });
+            }
+
+            filterSpells(tags);
+        }
+
+        /**
+         * Hide/show spells based on presence of at least one of the given tags.
+         */
+        function filterSpells(tags) {
+            var spells = document.querySelectorAll('.post-list li'),
+                selector,
+                unselected
+
+            // Start by making previously hidden spells visible again
+            // (this does not conflict with jets search filtering)
+            Array.prototype.slice.call(spells).forEach(function(spell) {
+                spell.style.display = '';
+            });
+
+            if (tags.length == 0) return;
+
+            // Hide all spells where all of the given tags are not present
+            selector = tags.map(function(tag) { return ':not([tags~="' + tag + '"])'; });
+            unselected = document.querySelectorAll('.post-list .post-link' + selector.join(''));
+            Array.prototype.slice.call(unselected).forEach(function(spell) {
+                spell.parentNode.style.display = 'none';
+            });
+        }
+
   		window.onload = function(){
         document.getElementById("menuIcon").addEventListener( 'click' , menuClick );
+        document.querySelector(".schools-list").addEventListener( 'click', schoolClick );
 	    }
     </script>
 </head>
@@ -119,10 +166,127 @@
 				</dd>
 				
 			</dl>
+			<dl class="schools-list">
+				<dt>Spell schools:</dt>
+					<dd>
+						<a class="spell-school selected" name="all">All</a>
+					</dd> |
+					
+					<dd>
+						<a class="spell-school" name="abjuration">Abjuration</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="conjuration">Conjuration</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="divination">Divination</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="enchantment">Enchantment</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="evocation">Evocation</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="illusion">Illusion</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="necromancy">Necromancy</a>
+					</dd>
+					
+					<dd>
+						<a class="spell-school" name="transmutaion">Transmutation</a>
+					</dd>
+					
+			</dl>
 
 			
 			<a id="cantrip"></a>
 			<h2 class="post-list-head jetsHide">Cantrips</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -1081,6 +1245,140 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<a class="post-meta jetsHide" href="#top">Back to top &#8593;</a>
 			
 			<a id="level2"></a>
@@ -1095,7 +1393,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/aganazzars-scorcher">Aganazzar's Scorcher</a>
+					<a class="post-link" tags="sorcerer wizard level2 evocation" href="/grimoire/spells/aganazzars-scorcher">Aganazzar's Scorcher</a>
 				</li>
 			</ul>
 			
@@ -1107,11 +1405,15 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/aid">Aid</a>
+					<a class="post-link" tags="cleric paladin level2 abjuration" href="/grimoire/spells/aid">Aid</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
@@ -1123,7 +1425,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/alter-self">Alter Self</a>
+					<a class="post-link" tags="sorcerer wizard level2 transmutation" href="/grimoire/spells/alter-self">Alter Self</a>
 				</li>
 			</ul>
 			
@@ -1137,9 +1439,11 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/animal-messenger">Animal Messenger</a>
+					<a class="post-link" tags="bard druid ranger level2 enchantment" href="/grimoire/spells/animal-messenger">Animal Messenger</a>
 				</li>
 			</ul>
 			
@@ -1149,11 +1453,14 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/arcane-lock">Arcane Lock</a>
+					<a class="post-link" tags="wizard level2 abjuration" href="/grimoire/spells/arcane-lock">Arcane Lock</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1161,11 +1468,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/augury">Augury</a>
+					<a class="post-link" tags="cleric level2 divination" href="/grimoire/spells/augury">Augury</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1175,11 +1484,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/barkskin">Barkskin</a>
+					<a class="post-link" tags="druid ranger level2 transmutation" href="/grimoire/spells/barkskin">Barkskin</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1189,11 +1500,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/beast-sense">Beast Sense</a>
+					<a class="post-link" tags="druid ranger level2 divination" href="/grimoire/spells/beast-sense">Beast Sense</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1207,11 +1520,14 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/blindnessdeafness">Blindness/Deafness</a>
+					<a class="post-link" tags="bard cleric sorcerer wizard level2 necromancy" href="/grimoire/spells/blindnessdeafness">Blindness/Deafness</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
@@ -1223,7 +1539,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/blur">Blur</a>
+					<a class="post-link" tags="sorcerer wizard level2 illusion" href="/grimoire/spells/blur">Blur</a>
 				</li>
 			</ul>
 			
@@ -1233,11 +1549,15 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/branding-smite">Branding Smite</a>
+					<a class="post-link" tags="paladin level2 evocation" href="/grimoire/spells/branding-smite">Branding Smite</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
@@ -1249,7 +1569,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/calm-emotions">Calm Emotions</a>
+					<a class="post-link" tags="bard cleric level2 enchantment" href="/grimoire/spells/calm-emotions">Calm Emotions</a>
 				</li>
 			</ul>
 			
@@ -1265,9 +1585,11 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/cloud-of-daggers">Cloud of Daggers</a>
+					<a class="post-link" tags="bard sorcerer warlock wizard level2 conjuration" href="/grimoire/spells/cloud-of-daggers">Cloud of Daggers</a>
 				</li>
 			</ul>
 			
@@ -1279,11 +1601,14 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/continual-flame">Continual Flame</a>
+					<a class="post-link" tags="cleric wizard level2 evocation" href="/grimoire/spells/continual-flame">Continual Flame</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1291,11 +1616,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/cordon-of-arrows">Cordon Of Arrows</a>
+					<a class="post-link" tags="ranger level2 transmutation" href="/grimoire/spells/cordon-of-arrows">Cordon Of Arrows</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1309,11 +1636,14 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/crown-of-madness">Crown of Madness</a>
+					<a class="post-link" tags="bard sorcerer warlock wizard level2 enchantment" href="/grimoire/spells/crown-of-madness">Crown of Madness</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
@@ -1327,7 +1657,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/darkness">Darkness</a>
+					<a class="post-link" tags="sorcerer warlock wizard level2 evocation" href="/grimoire/spells/darkness">Darkness</a>
 				</li>
 			</ul>
 			
@@ -1343,9 +1673,11 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/darkvision">Darkvision</a>
+					<a class="post-link" tags="druid ranger sorcerer wizard level2 transmutation" href="/grimoire/spells/darkvision">Darkvision</a>
 				</li>
 			</ul>
 			
@@ -1359,11 +1691,14 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/detect-thoughts">Detect Thoughts</a>
+					<a class="post-link" tags="bard sorcerer wizard level2 divination" href="/grimoire/spells/detect-thoughts">Detect Thoughts</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1375,11 +1710,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/dust-devil">Dust Devil</a>
+					<a class="post-link" tags="druid sorcerer wizard level2 conjuration" href="/grimoire/spells/dust-devil">Dust Devil</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1393,11 +1730,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/earthbind">Earthbind</a>
+					<a class="post-link" tags="druid sorcerer warlock wizard level2 transmutation" href="/grimoire/spells/earthbind">Earthbind</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1411,11 +1750,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/enhance-ability">Enhance Ability</a>
+					<a class="post-link" tags="bard cleric druid sorcerer level2 transmutation" href="/grimoire/spells/enhance-ability">Enhance Ability</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1425,11 +1766,14 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/enlarge-reduce">Enlarge/Reduce</a>
+					<a class="post-link" tags="sorcerer wizard level2 transmutation" href="/grimoire/spells/enlarge-reduce">Enlarge/Reduce</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
@@ -1441,7 +1785,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/enthrall">Enthrall</a>
+					<a class="post-link" tags="bard warlock level2 enchantment" href="/grimoire/spells/enthrall">Enthrall</a>
 				</li>
 			</ul>
 			
@@ -1451,9 +1795,11 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/find-steed">Find Steed</a>
+					<a class="post-link" tags="paladin level2 conjuration" href="/grimoire/spells/find-steed">Find Steed</a>
 				</li>
 			</ul>
 			
@@ -1467,11 +1813,14 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/find-traps">Find Traps</a>
+					<a class="post-link" tags="cleric druid ranger level2 divination" href="/grimoire/spells/find-traps">Find Traps</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1479,11 +1828,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/flame-blade">Flame Blade</a>
+					<a class="post-link" tags="druid level2 evocation" href="/grimoire/spells/flame-blade">Flame Blade</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1493,11 +1844,14 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/flaming-sphere">Flaming Sphere</a>
+					<a class="post-link" tags="druid wizard level2 conjuration" href="/grimoire/spells/flaming-sphere">Flaming Sphere</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
@@ -1509,7 +1863,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/gentle-repose">Gentle Repose</a>
+					<a class="post-link" tags="cleric wizard level2 necromancy" href="/grimoire/spells/gentle-repose">Gentle Repose</a>
 				</li>
 			</ul>
 			
@@ -1523,11 +1877,15 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/gust-of-wind">Gust of Wind</a>
+					<a class="post-link" tags="sorcerer wizard druid level2 evocation" href="/grimoire/spells/gust-of-wind">Gust of Wind</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
@@ -1539,7 +1897,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/heat-metal">Heat Metal</a>
+					<a class="post-link" tags="druid bard level2 transmutation" href="/grimoire/spells/heat-metal">Heat Metal</a>
 				</li>
 			</ul>
 			
@@ -1559,9 +1917,11 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/hold-person">Hold Person</a>
+					<a class="post-link" tags="bard cleric druid sorcerer warlock wizard level2 divination" href="/grimoire/spells/hold-person">Hold Person</a>
 				</li>
 			</ul>
 			
@@ -1577,11 +1937,14 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/invisibility">Invisibility</a>
+					<a class="post-link" tags="bard sorcerer warlock wizard level2 illusion" href="/grimoire/spells/invisibility">Invisibility</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1593,11 +1956,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/knock">Knock</a>
+					<a class="post-link" tags="sorcerer wizard bard level2 transmutation" href="/grimoire/spells/knock">Knock</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1613,11 +1978,14 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/lesser-restoration">Lesser Restoration</a>
+					<a class="post-link" tags="bard cleric druid paladin ranger level2 abjuration" href="/grimoire/spells/lesser-restoration">Lesser Restoration</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
@@ -1629,7 +1997,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/levitate">Levitate</a>
+					<a class="post-link" tags="sorcerer wizard level2 transmutation" href="/grimoire/spells/levitate">Levitate</a>
 				</li>
 			</ul>
 			
@@ -1643,9 +2011,11 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/locate-animals-or-plants">Locate Animals or Plants</a>
+					<a class="post-link" tags="bard druid ranger level2 divination" href="/grimoire/spells/locate-animals-or-plants">Locate Animals or Plants</a>
 				</li>
 			</ul>
 			
@@ -1665,11 +2035,14 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/locate-object">Locate Object</a>
+					<a class="post-link" tags="bard cleric druid paladin ranger wizard level2 divination" href="/grimoire/spells/locate-object">Locate Object</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1679,11 +2052,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/magic-mouth">Magic Mouth</a>
+					<a class="post-link" tags="bard wizard level2 illusion" href="/grimoire/spells/magic-mouth">Magic Mouth</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1693,11 +2068,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/magic-weapon">Magic Weapon</a>
+					<a class="post-link" tags="paladin wizard level2 transmutation" href="/grimoire/spells/magic-weapon">Magic Weapon</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1707,11 +2084,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/maximilians-earthen-grasp">Maximilian's Earthen Grasp</a>
+					<a class="post-link" tags="sorcerer wizard level2 transmutation" href="/grimoire/spells/maximilians-earthen-grasp">Maximilian's Earthen Grasp</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1719,11 +2098,14 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/melfs-acid-arrow">Melf's Acid Arrow</a>
+					<a class="post-link" tags="wizard level2 evocation" href="/grimoire/spells/melfs-acid-arrow">Melf's Acid Arrow</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
@@ -1737,7 +2119,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/mirror-image">Mirror Image</a>
+					<a class="post-link" tags="sorcerer warlock wizard level2 illusion" href="/grimoire/spells/mirror-image">Mirror Image</a>
 				</li>
 			</ul>
 			
@@ -1751,9 +2133,11 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/misty-step">Misty Step</a>
+					<a class="post-link" tags="sorcerer warlock wizard level2 conjuration" href="/grimoire/spells/misty-step">Misty Step</a>
 				</li>
 			</ul>
 			
@@ -1763,11 +2147,14 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/moonbeam">Moonbeam</a>
+					<a class="post-link" tags="druid level2 evocation" href="/grimoire/spells/moonbeam">Moonbeam</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1775,11 +2162,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/nystuls-magic-aura">Nystul's Magic Aura</a>
+					<a class="post-link" tags="wizard level2 illusion" href="/grimoire/spells/nystuls-magic-aura">Nystul's Magic Aura</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1789,11 +2178,14 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/pass-without-trace">Pass Without Trace</a>
+					<a class="post-link" tags="druid ranger level2 abjuration" href="/grimoire/spells/pass-without-trace">Pass Without Trace</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
@@ -1807,7 +2199,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/phantasmal-force">Phantasmal Force</a>
+					<a class="post-link" tags="bard sorcerer wizard level2 illusion" href="/grimoire/spells/phantasmal-force">Phantasmal Force</a>
 				</li>
 			</ul>
 			
@@ -1817,11 +2209,15 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/prayer-of-healing">Prayer of Healing</a>
+					<a class="post-link" tags="cleric level2 evocation" href="/grimoire/spells/prayer-of-healing">Prayer of Healing</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
@@ -1837,7 +2233,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/protection-from-poison">Protection from Poison</a>
+					<a class="post-link" tags="cleric ranger paladin druid level2 abjuration" href="/grimoire/spells/protection-from-poison">Protection from Poison</a>
 				</li>
 			</ul>
 			
@@ -1851,9 +2247,11 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/pyrotechnics">Pyrotechnics</a>
+					<a class="post-link" tags="bard sorcerer wizard level2 transmutation" href="/grimoire/spells/pyrotechnics">Pyrotechnics</a>
 				</li>
 			</ul>
 			
@@ -1865,11 +2263,14 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/ray-of-enfeeblement">Ray of Enfeeblement</a>
+					<a class="post-link" tags="warlock wizard level2 necromancy" href="/grimoire/spells/ray-of-enfeeblement">Ray of Enfeeblement</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1877,11 +2278,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/rope-trick">Rope Trick</a>
+					<a class="post-link" tags="wizard level2 transmutation" href="/grimoire/spells/rope-trick">Rope Trick</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1891,11 +2294,14 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/scorching-ray">Scorching Ray</a>
+					<a class="post-link" tags="sorcerer wizard level2 evocation" href="/grimoire/spells/scorching-ray">Scorching Ray</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
@@ -1909,7 +2315,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/see-invisibility">See Invisibility</a>
+					<a class="post-link" tags="bard sorcerer wizard level2 divination" href="/grimoire/spells/see-invisibility">See Invisibility</a>
 				</li>
 			</ul>
 			
@@ -1927,7 +2333,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/shatter">Shatter</a>
+					<a class="post-link" tags="sorcerer warlock wizard level2 evocation" href="/grimoire/spells/shatter">Shatter</a>
 				</li>
 			</ul>
 			
@@ -1941,9 +2347,11 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/silence">Silence</a>
+					<a class="post-link" tags="bard cleric ranger level2 illusion" href="/grimoire/spells/silence">Silence</a>
 				</li>
 			</ul>
 			
@@ -1957,11 +2365,14 @@
 			
 			
 			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/skywrite">Skywrite</a>
+					<a class="post-link" tags="bard druid wizard level2 transmutation" href="/grimoire/spells/skywrite">Skywrite</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1971,11 +2382,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/snillocs-snowball-swarm">Snilloc's Snowball Swarm</a>
+					<a class="post-link" tags="sorcerer wizard level2 evocation" href="/grimoire/spells/snillocs-snowball-swarm">Snilloc's Snowball Swarm</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -1987,11 +2400,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/spider-climb">Spider Climb</a>
+					<a class="post-link" tags="sorcerer warlock wizard level2 transmutation" href="/grimoire/spells/spider-climb">Spider Climb</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -2001,11 +2416,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/spike-growth">Spike Growth</a>
+					<a class="post-link" tags="druid ranger level2 transmutation" href="/grimoire/spells/spike-growth">Spike Growth</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -2013,15 +2430,32 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/spiritual-weapon">Spiritual Weapon</a>
+					<a class="post-link" tags="cleric level2 evocation" href="/grimoire/spells/spiritual-weapon">Spiritual Weapon</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			<ul class="post-list jetsContent">
+				<li>
+					<a class="post-link" tags="bard sorcerer warlock wizard level2 enchantment" href="/grimoire/spells/suggestion">Suggestion</a>
+				</li>
+			</ul>
 			
 			
 			
@@ -2033,9 +2467,15 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/suggestion">Suggestion</a>
+					<a class="post-link" tags="cleric level2 abjuration" href="/grimoire/spells/warding-bond">Warding Bond</a>
 				</li>
 			</ul>
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -2045,7 +2485,7 @@
 			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/warding-bond">Warding Bond</a>
+					<a class="post-link" tags="bard druid sorcerer level2 evocation" href="/grimoire/spells/warding-wind">Warding Wind</a>
 				</li>
 			</ul>
 			
@@ -2059,11 +2499,16 @@
 			
 			
 			
+			
+			
+			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/warding-wind">Warding Wind</a>
+					<a class="post-link" tags="cleric druid ranger sorcerer level2 transmutation" href="/grimoire/spells/water-walk">Water Walk</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -2073,11 +2518,13 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/web">Web</a>
+					<a class="post-link" tags="sorcerer wizard level2 conjuration" href="/grimoire/spells/web">Web</a>
 				</li>
 			</ul>
+			
 			
 			
 			
@@ -2089,11 +2536,14 @@
 			
 			
 			
+			
 			<ul class="post-list jetsContent">
 				<li>
-					<a class="post-link" href="/grimoire/spells/zone-of-truth">Zone of Truth</a>
+					<a class="post-link" tags="bard cleric paladin level2 enchantment" href="/grimoire/spells/zone-of-truth">Zone of Truth</a>
 				</li>
 			</ul>
+			
+			
 			
 			
 			
@@ -2101,6 +2551,102 @@
 			
 			<a id="level3"></a>
 			<h2 class="post-list-head jetsHide">Level 3</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -2961,10 +3507,180 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<a class="post-meta jetsHide" href="#top">Back to top &#8593;</a>
 			
 			<a id="level5"></a>
 			<h2 class="post-list-head jetsHide">Level 5</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -3677,10 +4393,122 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<a class="post-meta jetsHide" href="#top">Back to top &#8593;</a>
 			
 			<a id="level7"></a>
 			<h2 class="post-list-head jetsHide">Level 7</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			
@@ -4037,10 +4865,80 @@
 			
 			
 			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<a class="post-meta jetsHide" href="#top">Back to top &#8593;</a>
 			
 			<a id="level9"></a>
 			<h2 class="post-list-head jetsHide">Level 9</h2>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			
 			

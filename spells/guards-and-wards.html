@@ -13,6 +13,7 @@
     <link rel="canonical" href="http://ephe.github.io/grimoire/spells/guards-and-wards">
     <script src="http://use.typekit.net/nra6zxt.js"></script>
     <script src="/grimoire/js/jets.min.js"></script>
+	<link media="all" href="https://use.typekit.net/c/655870/1w;calluna,2,b4p:P:i4,b4t:P:i7,b4m:P:n3,b4n:P:n4,b4s:P:n7/l" rel="stylesheet">
     <script>try{Typekit.load();}catch(e){}</script>
     <script type="text/javascript">
     	function menuClick() {
@@ -24,8 +25,54 @@
     		}
   		}
 
+        function schoolClick(e) {
+            var schools = Array.prototype.slice.call(document.querySelectorAll('.spell-school:not([name="all"])')),
+                selected = e.target,
+                tags = [];
+
+            if (selected.nodeName !== 'A') return;
+            if (selected.name == 'all') {
+                selected.classList.add('selected');
+                schools.forEach(function(school) {
+                    school.classList.remove('selected');
+                });
+            }
+            else {
+                document.querySelector('.spell-school[name="all"]').classList.remove('selected');
+                selected.classList.toggle('selected');
+                tags = Array.prototype.slice.call(document.querySelectorAll('.spell-school.selected')).map(function(el) { return el.name; });
+            }
+
+            filterSpells(tags);
+        }
+
+        /**
+         * Hide/show spells based on presence of at least one of the given tags.
+         */
+        function filterSpells(tags) {
+            var spells = document.querySelectorAll('.post-list li'),
+                selector,
+                unselected
+
+            // Start by making previously hidden spells visible again
+            // (this does not conflict with jets search filtering)
+            Array.prototype.slice.call(spells).forEach(function(spell) {
+                spell.style.display = '';
+            });
+
+            if (tags.length == 0) return;
+
+            // Hide all spells where all of the given tags are not present
+            selector = tags.map(function(tag) { return ':not([tags~="' + tag + '"])'; });
+            unselected = document.querySelectorAll('.post-list .post-link' + selector.join(''));
+            Array.prototype.slice.call(unselected).forEach(function(spell) {
+                spell.parentNode.style.display = 'none';
+            });
+        }
+
   		window.onload = function(){
         document.getElementById("menuIcon").addEventListener( 'click' , menuClick );
+        document.querySelector(".schools-list").addEventListener( 'click', schoolClick );
 	    }
     </script>
 </head>
@@ -99,6 +146,12 @@
         
     </dd>
     
+    <dd>
+        
+          <a href="/grimoire/tags/abjuration.html">abjuration</a>
+        
+    </dd>
+    
   </header>
 
   <article class="post-content">
@@ -120,21 +173,21 @@
 
 <p><strong>Corridors.</strong> Fog fills all the warded corridors, making them heavily obscured. In addition, at each intersection or branching passage offering a choice of direction, there is a 50 percent chance that a creature other than you will believe it is going in the opposite direction from the one it chooses.</p>
 
-<p><strong>Doors.</strong> All doors in the warded area are magically locked, as if sealed by an <em><a href="../arcane-lock/" title="arcane lock (lvl 2)">arcane lock</a></em> spell. In addition, you can cover up to ten doors with an illusion (equivalent to the illusory object function of the <em><a href="../minor-illusion/" title="minor illusion (cantrip)">minor illusion</a></em> spell) to make them appear as plain sections of wall.</p>
+<p><strong>Doors.</strong> All doors in the warded area are magically locked, as if sealed by an <em><a href="arcane-lock/" title="arcane lock (lvl 2)">arcane lock</a></em> spell. In addition, you can cover up to ten doors with an illusion (equivalent to the illusory object function of the <em><a href="minor-illusion" title="minor illusion (cantrip)">minor illusion</a></em> spell) to make them appear as plain sections of wall.</p>
 
-<p><strong>Stairs.</strong> Webs fill all stairs in the warded area from top to bottom, as the <em><a href="../web/" title="web (lvl 2)">web</a></em> spell. These strands regrow in 10 minutes if they are burned or torn away while guards and wars lasts.</p>
+<p><strong>Stairs.</strong> Webs fill all stairs in the warded area from top to bottom, as the <em><a href="web" title="web (lvl 2)">web</a></em> spell. These strands regrow in 10 minutes if they are burned or torn away while guards and wars lasts.</p>
 
 <p><strong>Other Spell Effect.</strong> You can place your choice of one of the following magical effects within the warded area of the stronghold.</p>
 
 <ul>
-  <li>Place <em><a href="../dancing-lights/" title="dancing lights (cantrip)">dancing lights</a></em> in four corridors. You can designate a simple program that the lights repeat as long as guards and wards lasts.</li>
-  <li>Place <em><a href="../magic-mouth/" title="magic mouth (lvl 2)">magic mouth</a></em> in two locations.</li>
-  <li>Place <em><a href="../stinking-cloud/" title="stinking cloud (lvl 3)">stinking cloud</a></em> in two locations. The vapors appear in the places you designate; They return within 10 minutes if dispersed by wind while <em>guards and wards</em> lasts.</li>
-  <li>Place a constant <em><a href="../gust-of-wind/" title="gust of wind (lvl 2)">gust of wind</a></em> in one corridor or room.</li>
-  <li>Place a <em><a href="../suggestion/" title="suggestion (lvl 2)">suggestion</a></em> in one location. You select an area of up to 5 feet square, and any creature that enters or passes through the area receives the suggestion mentally.</li>
+  <li>Place <em><a href="dancing-lights" title="dancing lights (cantrip)">dancing lights</a></em> in four corridors. You can designate a simple program that the lights repeat as long as guards and wards lasts.</li>
+  <li>Place <em><a href="magic-mouth" title="magic mouth (lvl 2)">magic mouth</a></em> in two locations.</li>
+  <li>Place <em><a href="stinking-cloud" title="stinking cloud (lvl 3)">stinking cloud</a></em> in two locations. The vapors appear in the places you designate; They return within 10 minutes if dispersed by wind while <em>guards and wards</em> lasts.</li>
+  <li>Place a constant <em><a href="gust-of-wind" title="gust of wind (lvl 2)">gust of wind</a></em> in one corridor or room.</li>
+  <li>Place a <em><a href="suggestion" title="suggestion (lvl 2)">suggestion</a></em> in one location. You select an area of up to 5 feet square, and any creature that enters or passes through the area receives the suggestion mentally.</li>
 </ul>
 
-<p>The whole warded area radiates magic. A <em><a href="../dispel-magic/" title="dispel magic (lvl 3)">dispel magic</a></em> cast on a specific effect, if successful, removes only that effect.</p>
+<p>The whole warded area radiates magic. A <em><a href="dispel-magic" title="dispel magic (lvl 3)">dispel magic</a></em> cast on a specific effect, if successful, removes only that effect.</p>
 
 <p>You can create a permanently guarded and warded structure by casting this spell there every day for one year.</p>
 
