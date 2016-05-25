@@ -8,7 +8,11 @@ module Jekyll
       @name = dir + '.html'
 
       self.process(@name)
-      self.read_yaml(File.join(base, '_layouts'), 'tag_index.html')
+	  if tag == 'abjuration' or tag == 'conjuration' or tag == 'divination' or tag == 'enchantment' or tag == 'evocation' or tag == 'illusion' or tag == 'necromancy' or tag == 'transmutation'
+		  self.read_yaml(File.join(base, '_layouts'), 'school_index.html')
+	  else
+		  self.read_yaml(File.join(base, '_layouts'), 'tag_index.html')
+	  end
       self.data['tag'] = tag
       self.data['title'] = tag.capitalize
     end
@@ -17,7 +21,7 @@ module Jekyll
   class TagGenerator < Generator
     safe true
     def generate(site)
-      if site.layouts.key? 'tag_index'
+      if site.layouts.key? 'tag_index' or site.layouts.key? 'school_index'
         dir = site.config['tag_dir'] || 'tags'
         site.tags.keys.each do |tag|
           write_tag_index(site, File.join(dir, tag), tag)
